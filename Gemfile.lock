@@ -6,16 +6,17 @@ GIT
       capistrano (>= 2.0.0)
 
 GIT
+  remote: git://github.com/BrandyMint/newtone-fingerprint.git
+  revision: 8ca97d2cc822cdcac8c729fb8b0eec5d7fadefe0
+  specs:
+    newtone-fingerprint (0.0.1)
+
+GIT
   remote: git://github.com/BrandyMint/newtone-solr.git
   revision: d74a330a9970f9d23347729d8c001ba5af9936d0
   specs:
     newtone-solr (0.0.1)
       escape (~> 0.0.4)
-
-PATH
-  remote: /Users/nitr/www/newtone-fingerprint
-  specs:
-    newtone-fingerprint (0.0.1)
 
 GEM
   remote: https://rubygems.org/

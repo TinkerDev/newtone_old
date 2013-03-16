@@ -7,15 +7,16 @@ class Recognition
   end
 
 
-  def recognize
+  def recognize elbow=10
     make_raw_fingerprint
     extract_compressed_data_string
     decompress_compressed_data_string
     parse_actual_data_string
+    clean_codes_by_time
     do_solr_query
   end
 
-  def friendly_recognize
+  def friendly_recognize elbow=10
     response = recognize['response']
     if response['numFound'] > 0
       docs = response['docs']
@@ -68,5 +69,28 @@ class Recognition
     seq.split('').each_slice(size).to_a
   end
 
+  def clean_codes_by_time
+    #Remove all codes from a codes that are > 60 seconds in length.
+    #Because we can only match 60 sec, everything else is unnecessary
+
+
+    # If we use the codegen on a file with start/stop times, the first timestamp
+    # is ~= the start time given. There might be a (slightly) earlier timestamp
+    # in another band, but this is good enough
+    first_timestamp = @timestamps[1]
+
+    sixty_seconds = (60.0 * 1000.0 / 23.2 + first_timestamp).to_i
+    timestamps = codes = []
+
+    @timestamps.each_with_index do |timestamp, index|
+      if timestamp <= sixty_seconds
+        timestamps << timestamp
+        codes << index
+      end
+    end
+
+    @timestamps, @codes = timestamps, codes
+    @codes
+  end
 
 end
