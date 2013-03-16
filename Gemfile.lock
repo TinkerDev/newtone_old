@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: git://github.com/BrandyMint/newtone-fingerprint.git
-  revision: 16d7519a604a8ae6c2c84ff8e90cc94da5db8143
+  revision: 8ca97d2cc822cdcac8c729fb8b0eec5d7fadefe0
   specs:
     newtone-fingerprint (0.0.1)
 
