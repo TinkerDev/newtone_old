@@ -1,0 +1,13 @@
+@import "newtone/*.png"
+@include all-newtone-sprites
+
+.newtone-face
+  width: 369px
+  height: 560px
+  position: absolute
+  +transition(opacity 0.2s ease)
+  &.hidden
+    +opacity(0)
+
+  &.visible
+    +opacity(100)

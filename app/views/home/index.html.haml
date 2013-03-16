@@ -1,6 +1,9 @@
 .row
   .span6
-    = newtone_face :normal
+    .newtone-face.newtone-normal
+    - newtone_states = [:bad, :normal, :good]
+    - newtone_states.each do |state|
+      %div{ :class => "newtone-face newtone-#{state} hidden j-newtone-state" }
   .span6
     %h1.home-title
       Drop your tunes here.
@@ -23,3 +26,7 @@
           .browse-button
             = f.button 'upload file', :class => 'btn btn-large btn-primary record-button'
             = file_field :sample, :upload, :class => 'audio-upload-input'
+
+    .btn-group
+      - newtone_states.each do |state|
+        = link_to_function "#{state}", "newtoneFace('#{state}')", :class => 'btn'
