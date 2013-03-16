@@ -6,5 +6,20 @@
       Drop your tunes here.
     %h2.home-title-description
       I'll recognize 'em
-    = audio_buttons
-    .well.audio-block
+    %ul.nav.nav-tabs.audio-buttons
+      = audio_button :record, :active
+      = audio_button :upload
+    %hr.small
+    .tab-content.audio-block
+      .tab-pane.active#record
+        = link_to "javascript:void(0);", :class => 'j-record-button' do
+          .btn.btn-large.btn-success.record-button
+            record tune
+        = link_to "javascript:void(0);", :class => 'j-record-button hide' do
+          .btn.btn-large.btn-danger.record-button
+            stop recording
+      .tab-pane#upload
+        = form_for '#' do |f|
+          .browse-button
+            = f.button 'upload file', :class => 'btn btn-large btn-primary record-button'
+            = file_field :sample, :upload, :class => 'audio-upload-input'

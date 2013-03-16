@@ -5,6 +5,7 @@
     vertical-align: top
     width: auto !important
     height: auto
+    opacity: 1
 
 .nav > .active > a > [class^="icon-"], 
 .nav > .active > a > [class*=" icon-"], 
@@ -24,8 +25,9 @@ a:hover
 
 @each $size in 10, 12, 14, 16, 18, 20, 24, 32, 48, 64, 128, 256, 512
   .icon-size-#{$size}
-    font-size: #{$size}px
-    //min-width: #{$size}px
+    &, &:before
+      font-size: #{$size}px
+      //min-width: #{$size}px
 
 @each $align in top, baseline, middle, bottom
   .v-align-#{$align}

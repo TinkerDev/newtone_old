@@ -1,8 +1,15 @@
+.audio-block
+  margin:
+    top: 1em
+    bottom: 1em
+
 .audio-buttons
   display: block
   width: 100%
-  margin-top: 20px
-  .audio-button
+  margin: 0
+  border: 0
+
+  & > li
     width: 50%
     padding:
       top: 20px
@@ -10,8 +17,52 @@
       left: 0
       right: 0
     margin: 0
+    & > a
+      display: block
+      margin: 0 auto
+      text-shadow: 0 1px 0 $white
+      text-align: center
+      +link-colors($textColor, $white)
+      width: 64px
+      height: 64px
+      padding: 20px 10px 0 10px
+      +border-radius(42px)
+      &:hover
+        color: $redBrandColor
+      +transition(background 0.2s ease, color 0.2s ease)
+    &.active
+      & > a
+        color: $white
+        border-bottom: 0
+        background: $redBrandColor
+        text-shadow: 0 1px 0 $black
+        &:hover
+          color: $white
+          border-bottom: 0
+          background: $redBrandColor
+
+
 .audio-button-icon
-  font-size: 32px
+  &, &:before
+    font-size: 32px
+    opacity: 1
+    padding-top: 2px
+
+.record-button
+  display: block
+  &.hide
+    display: none
+  margin: 0 auto
+  width: 240px
 
 .audio-block
-  background: rgba(0,0,0,0.8)
+  form
+    margin: 0
+    .browse-button
+      width: 100%
+      .record-button
+        width: 280px
+      .btn.btn-large
+        padding:
+          top: 12px
+          bottom: 10px

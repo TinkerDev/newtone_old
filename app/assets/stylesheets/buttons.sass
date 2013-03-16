@@ -50,3 +50,21 @@
       opacity: 1
   .social-#{nth($social,1)}
     color: nth($social, 2)
+
+
+.browse-button
+  cursor: pointer
+  float: left
+  overflow: hidden
+  position: relative
+  input
+    &[type="button"]
+      cursor: pointer
+    &[type="file"]
+      width: 200px
+      position: absolute
+      right: 0px
+      top: 0px
+      cursor: pointer
+      opacity: 0
+      filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0)
