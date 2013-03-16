@@ -1,9 +1,9 @@
 production:
   solr:
     hostname: localhost
-    port: 8983
+    port: 8502
     log_level: WARNING
-    path: /solr/swapeet-production
+    path: /solr/newtone-production
 
 development:
   solr:
@@ -14,5 +14,5 @@ development:
 test:
   solr:
     hostname: localhost
-    port: 8983
+    port: 8502
     log_level: WARNING

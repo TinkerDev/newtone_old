@@ -5,4 +5,4 @@ set :rails_env, "production"
 #set :application, "newtone.name"
 #set :user,      'wwwswap'
 #require 'airbrake/capistrano'
-after 'deploy:restart', 'solr:background'
+#after 'deploy:restart', 'solr:background'
