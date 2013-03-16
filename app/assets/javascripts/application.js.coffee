@@ -15,7 +15,7 @@ $ ->
         screenState('processing')
         jqXHR = data.submit()
           .success (result, textStatus, jqXHR) ->
-            if result != "null"
+            if result != null
               state = result.status == 1 ? "good" : "bad"
               newtoneFace(state)
               setTimeout(
@@ -23,6 +23,8 @@ $ ->
                 1000
               )
               screenState('results')
+            else
+              screenState('welcome')
           .error (jqXHR, textStatus, errorThrown) ->
             screenState('welcome')
     always: (e, date)->
