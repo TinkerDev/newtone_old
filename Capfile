@@ -7,7 +7,8 @@ load 'config/deploy' # remove this line to skip loading any of the default tasks
 namespace :solr do
   desc "Выполняет rake sunspot:reindex"
   task :restart do
-    run "cd #{current_path} && #{rake} RAILS_ENV=#{rails_env} newtone:solr:restart"
+    run "cd #{current_path} && #{rake} RAILS_ENV=#{rails_env} newtone:solr:stop"
+    run "cd #{current_path} && #{rake} RAILS_ENV=#{rails_env} newtone:solr:start"
   end
 
   desc "Запускает фонове выполнение rake sunspot:reindex"
