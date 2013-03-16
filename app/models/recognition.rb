@@ -6,6 +6,7 @@ class Recognition
     @audio_file_path = audio_file_path
   end
 
+
   def recognize
     make_raw_fingerprint
     extract_compressed_data_string
