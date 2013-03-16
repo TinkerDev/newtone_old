@@ -31,15 +31,4 @@
       - newtone_states.each do |state|
         = link_to_function "#{state}", "newtoneFace('#{state}')", :class => 'btn'
     .j-spinner.hide= spinner
-    %hr.small
-    .results
-      - results = { 'artist' => 'title', 'artist2' => 'title2', 'artist3' => 'title3', 'artist4' => 'title4', 'artist5' => 'title5' }
-      %h2.font-weight-normal What it may be
-      %ul.nav.nav-list.results-list
-        - results.each_pair do |artist, title|
-          %li
-            = link_to 'javascript:void(0);' do
-              %span.artist= artist
-              %span.title= title
-              %span.pull-right= fontello 'right-open', 14, 'v-align-baseline'
-
+.clearfix
