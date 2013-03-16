@@ -13,7 +13,7 @@ namespace :solr do
       puts "***Unable to stop Solr with error: #{error}"
       puts "***Solr may have not been started. Continuing anyway.***"
     end
-    run "cd #{current_path} && #{rake} RAILS_ENV=#{rails_env} newtone:solr:start"
+    run("cd #{deploy_to}/current && /usr/bin/env rake sunspot:solr:start RAILS_ENV=#{rails_env}")
   end
 
   desc "Запускает фонове выполнение rake sunspot:reindex"
