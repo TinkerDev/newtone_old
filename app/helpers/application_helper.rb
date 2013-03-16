@@ -8,10 +8,6 @@ module ApplicationHelper
     content_tag :i, '', :class => "fontello-icon-#{icon} icon-size-#{size} #{custom_class}"
   end
 
-  def newtone_face mood
-    image_tag image_path("newtone/newtone_#{mood}.png"), :class => "newtone-face newtone-#{mood}"
-  end
-  
   def social_button name
     name = name.to_s
     path = name
