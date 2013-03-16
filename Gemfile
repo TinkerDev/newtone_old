@@ -38,3 +38,4 @@ end
 gem "rails_config"
 gem 'resque'
 gem 'rvm'
+gem 'newtone-solr', :git => 'git://github.com/BrandyMint/newtone-solr.git'

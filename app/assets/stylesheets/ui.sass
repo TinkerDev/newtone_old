@@ -15,7 +15,10 @@ a
     text-decoration: none
     .muted
       color: $linkColorHover
-    
+
+@each $weight in 200, 400, 700, 800, light, normal, bold
+  .font-weight-#{$weight}
+    font-weight: $weight
 
 .gray-link
   +link-colors($textColor, $linkColorHover)
@@ -91,4 +94,23 @@ a
   letter-spacing: 1px
 
 
+.results-list
+  border: 1px solid $hrBorder
+  background: $white
+  padding: 0
+  margin: 0
+  & > li
+    padding: 0
+    margin: 0
+    border-top: 1px solid lighten($hrBorder,5%)
+    &:first-child
+      border-top: 0
+    & > a
+      padding: 0.5em 0.5em
+      margin: 0
+      &:hover
+        color: $white
+        background: $redBrandColor
+        border-top-color: $redBrandColor
+        text-shadow: 0 1px 0 rgba($black, .3)
 

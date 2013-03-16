@@ -5,6 +5,13 @@ GIT
     capistrano-recipes0 (1.1.3)
       capistrano (>= 2.0.0)
 
+GIT
+  remote: git://github.com/BrandyMint/newtone-solr.git
+  revision: d74a330a9970f9d23347729d8c001ba5af9936d0
+  specs:
+    newtone-solr (0.0.1)
+      escape (~> 0.0.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -86,6 +93,7 @@ GEM
       launchy (~> 2.1)
       mail (~> 2.2)
     erubis (2.7.0)
+    escape (0.0.4)
     eventmachine (1.0.3)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -275,6 +283,7 @@ DEPENDENCIES
   html2haml (>= 1.0.1)
   hub (>= 1.10.2)
   jquery-rails
+  newtone-solr!
   omniauth (>= 1.1.3)
   omniauth-twitter
   pg (>= 0.14.1)

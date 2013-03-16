@@ -1,10 +1,45 @@
 .row
   .span6
-    = newtone_face :normal
+    .newtone-face.newtone-normal.fadeIn
+    - newtone_states = [:bad, :normal, :good]
+    - newtone_states.each do |state|
+      %div{ :class => "newtone-face newtone-#{state} hidden j-newtone-state" }
   .span6
     %h1.home-title
       Drop your tunes here.
     %h2.home-title-description
       I'll recognize 'em
-    = audio_buttons
-    .well.audio-block
+    %ul.nav.nav-tabs.audio-buttons
+      = audio_button :record, :active
+      = audio_button :upload
+    %hr.small
+    .tab-content.audio-block
+      .tab-pane.active#record
+        = link_to "javascript:void(0);", :class => 'j-record-button' do
+          .btn.btn-large.btn-success.record-button
+            record tune
+        = link_to "javascript:void(0);", :class => 'j-record-button hide' do
+          .btn.btn-large.btn-danger.record-button
+            stop recording
+      .tab-pane#upload
+        = form_for '#' do |f|
+          .browse-button
+            = f.button 'upload file', :class => 'btn btn-large btn-primary record-button'
+            = file_field :sample, :upload, :class => 'audio-upload-input'
+
+    -#.btn-group
+      - newtone_states.each do |state|
+        = link_to_function "#{state}", "newtoneFace('#{state}')", :class => 'btn'
+    .j-spinner.hide= spinner
+    %hr.small
+    .results
+      - results = { 'artist' => 'title', 'artist2' => 'title2', 'artist3' => 'title3', 'artist4' => 'title4', 'artist5' => 'title5' }
+      %h2.font-weight-normal What it may be
+      %ul.nav.nav-list.results-list
+        - results.each_pair do |artist, title|
+          %li
+            = link_to 'javascript:void(0);' do
+              %span.artist= artist
+              %span.title= title
+              %span.pull-right= fontello 'right-open', 14, 'v-align-baseline'
+
