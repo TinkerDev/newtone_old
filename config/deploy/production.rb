@@ -6,13 +6,3 @@ set :rails_env, "production"
 #set :user,      'wwwswap'
 #require 'airbrake/capistrano'
 after 'deploy:restart', 'solr:background'
-
-#Конфиг деплоя на production
-#server '144.76.6.142', :app, :web, :db, :primary => true
-#set :branch, "master" unless exists?(:branch)
-#set :rails_env, "production"
-#set :user,      'gridology'
-#
-#require 'airbrake/capistrano'
-#
-#after 'deploy:restart', 'solr:background'
