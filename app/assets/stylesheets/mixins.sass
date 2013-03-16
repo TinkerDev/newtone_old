@@ -1,0 +1,32 @@
+@mixin smallParagraph
+  font-size: $smallFontSize
+  line-height: 1.3em
+  margin-bottom: 0.5em
+
+@mixin noMarginsInputs
+  form, .control-group, input, select, textarea
+    margin-bottom: 0
+
+@mixin messagesListItem
+  font-size: $rem
+  line-height: 1.2em
+  border-bottom: 1px solid $grayLightest
+  background: $white
+  &:first-child
+    border-top: 1px solid $grayLightest
+  &.unread
+    &, &:hover
+      background: lighten($blueBrandColor, 42%)
+      border-bottom-color: lighten($blueBrandColor, 32%)
+  &:hover
+    background: lighten($blueBrandColor, 44%) !important
+
+@mixin imageFrame()
+  border: 3px solid $white
+  color: $white
+  background: $white
+  +border-radius(3px)
+  +box-shadow(0 1px 2px 0 rgba($black, .25))
+  margin-bottom: 3px
+
+

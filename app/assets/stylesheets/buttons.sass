@@ -1,0 +1,52 @@
+
+.btn-success-light
+  @extend .btn-success
+  font-weight: normal
+  +buttonBackground(lighten($btnSuccessBackground,10%), lighten($btnSuccessBackgroundHighlight,10%))
+
+.btn-danger-light
+  &, &:hover
+    @extend .btn-danger
+    font-weight: normal
+    +buttonBackground(lighten($btnDangerBackground,20%), lighten($btnDangerBackgroundHighlight,20%))
+    &:hover
+      +buttonBackground($btnDangerBackground, $btnDangerBackgroundHighlight)
+
+.btn-mini
+  font-size: $rem - 1px
+
+.btn-primary
+  text-shadow: 0 -1px 1px rgba(0,0,0,0.4)
+
+
+
+.social-login-button
+  vertical-align: middle
+  color: #fff
+  +border-radius(4px)
+  padding: 4px 8px
+  font-size: 1*$rem
+  vertical-align: middle
+  +border-radius(4px)
+  text-shadow: none
+  color: $white
+  +transition(background 0.2s ease, color 0.2s ease)
+  &:hover
+    color: $white
+
+.social-login-button-large
+  @extend .social-login-button
+  font-size: 1.5em
+  line-height: 1.2em
+  padding: 20px
+
+@each $social in (facebook $facebookColor), (twitter, $twitterColor), (linkedin, $linkedInColor), (google, $googleColor), (google_oauth2, $googleColor), (vkontakte $vkontakteColor)
+  .social-login-button-#{nth($social,1)}
+    background-color: nth($social, 2)
+    color: lighten(nth($social,2), 50%)
+    &:hover
+      background-color: darken(nth($social,2), 10%)
+    //[class*='fontello-icon-']::before, [class*=' fontello-icon-']::before
+      opacity: 1
+  .social-#{nth($social,1)}
+    color: nth($social, 2)

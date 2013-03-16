@@ -1,1 +1,11 @@
-= link_to "Newtone", root_path, :class => 'brand'
+= link_to root_path, :class => 'brand' do
+  .pull-left
+    = image_tag image_path('logo.png'), :class => 'logo'
+  .brandname.pull-left
+    Newtone
+  .clearfix
+  
+%ul.nav.pull-right
+  %li
+    = link_to social_button_title :facebook, '#'
+.clearfix

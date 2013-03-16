@@ -1,0 +1,86 @@
+@charset "UTF-8"
+
+$gray: rgb(100,100,100)
+$grayLight: lighten($gray,30%)
+$grayLighter: lighten($gray,40%)
+$grayLightest: lighten($gray,50%)
+$grayLightestBackground: lighten($grayLightest,5%)
+$grayDark: darken($gray,10%)
+$grayDarker: darken($gray,20%)
+$grayDarkest: rgb(20,20,20)
+
+$greenLight: rgba(143,200,0,1)
+$greenDark: rgba(115,160,0,1)
+$greenLightTransparent: rgba(143,200,0,0.75)
+
+$blue: #08c
+$white: #fff
+$black: #000
+
+$purple: rgb(158, 0, 93)
+
+// swapeet new colors
+$blueBrandColor: rgb(33,176,245)
+$blueBrandColorLight: lighten($blueBrandColor,20%)
+$redBrandColor: rgb(220,94,84)
+$redBrandColorLight: lighten($redBrandColor,20%)
+$yellowBrandColor: rgb(255,210,98)
+$yellowBrandColorLight: lighten($yellowBrandColor,20%)
+$greenBrandColor: rgb(139,220,95)
+$greenBrandColorLight: lighten($greenBrandColor,20%)
+$grayBrandColor: rgb(139,139,139)
+$grayBrandColorLight: lighten($grayBrandColor,20%)
+
+$blueMuted: adjust-hue(saturate(darken($white,50%),30%), 200%)
+
+$textColor: $grayDark
+$textColorDark: $grayDarker
+
+$linkColor: darken($textColor,20%)
+$linkColorHover: $redBrandColor
+//$linkColor: $grayDarkest
+//$linkColorHover: $grayDarker
+
+//$bodyBackground: darken($white,5%)
+
+$bodyBackground: rgb(249,249,249)
+
+$headingsColor: $textColor
+$headingsFontWeight: bold
+
+
+$navbarBackgroundColor: $white
+
+$navbarBackgroundTop: $navbarBackgroundColor
+$navbarBackgroundBottom: darken($navbarBackgroundTop,10%)
+
+$navbarText: lighten($textColor,10%)
+$navbarTextShadowColor: transparent
+$navbarLinkColor: lighten($textColor,10%)
+$navbarLinkColorHover: $redBrandColor
+$navbarLinkColorActive: $redBrandColor
+//$navbarLinkBackgroundHover: rgba(lighten($navbarBackgroundColor,10%),.5)
+$navbarLinkBackgroundHover: transparent
+$navbarLinkBackgroundActive: rgba($black, 0.03)
+
+$btnPrimaryBackground: $blueBrandColor
+$btnPrimaryBackgroundHighlight: adjust-hue($btnPrimaryBackground, 10%)
+
+$hrBorder: #dddddd
+
+$facebookColor: #3b5998
+$twitterColor: #00a0d1
+$linkedInColor: #0e76a8
+$googleColor: #d4472c
+$vkontakteColor: #4E7299
+
+$highlightBackgroud: #fff8f0
+
+$navbarHeight: 50px
+
+$modalHeight: 550px
+
+$contentMargin: 0
+$contentMarginGuest: 20px
+
+$guestImagePaddingBottom: 110px

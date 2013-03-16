@@ -1,0 +1,78 @@
+.application-navbar
+  margin-bottom: 20px
+
+.navbar-inner
+  padding-top: 1em
+  &, .navbar-fixed-top &, .navbar-static-top &
+    text-shadow: none
+    min-height: 57px
+    //+gradient-vertical(rgba($navbarBackgroundColor, .9), rgba($navbarBackgroundColor, .9))
+    background: none
+    opacity: 1
+    border: 0
+    //+box-shadow(0 0 4px rgba(darken($bodyBackground, 60%), .15))
+    +box-shadow(none)
+
+.navbar .nav > li
+  & > a
+    padding: 16px 12px
+    text-shadow: 0 1px 1px $navbarTextShadowColor
+    font-size: 1.1em
+    line-height: 1.8em
+    color: $navbarText
+    background: none
+    +transition(color 0.2s ease, text-shadow 0.2s ease, background 0.4s ease)
+    &:hover
+      +box-shadow(none)
+    .badge
+      margin-left: 0.5em
+  &.active > a
+    background: none
+    +link-colors($navbarLinkColorActive,$navbarLinkColorActive)
+    +box-shadow(none)
+    &:hover
+      +box-shadow(none)
+
+.navbar
+  .dropdown-menu li
+    & > a
+      +link-colors($navbarLinkColor,$linkColorHover)
+      &:hover
+        background: $navbarLinkBackgroundHover
+    &.active > a
+      +link-colors($navbarLinkColorActive,$navbarLinkColorActive)
+      background: $navbarLinkBackgroundActive
+
+
+.navbar
+  +box-shadow(none)
+  .brand
+    .brandname
+      padding:
+        top: 20px
+        left: 10px
+      font-weight: normal
+.navbar
+  .avatar_24
+    +border-radius(3px)
+    margin-top: -5px
+    margin-bottom: -4px
+    margin-right: 6px
+
+.navbar .search-box
+  margin-top: 14px
+  form
+    margin-top: 0
+  input
+    border-right: 0
+    border-color: $grayLightest
+    +box-shadow(none)
+  .btn
+    background: $white
+    border-color: $grayLightest
+    border-left: 0
+    +link-colors($gray, $textColor)
+    text-shadow: none
+    +box-shadow(none)
+    &:hover
+      border-color: $grayLightest
