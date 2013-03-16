@@ -1,6 +1,8 @@
-.row
-  .span2
-    = image_tag image_path('logo.png')
-  .span2
-    = link_to 'http://brandymint.ru/' do
-      = image_tag image_path('brandymint.png')
+.container
+  .row
+    .span3
+      .pull-left= image_tag image_path('logo.png')
+      %h4.no-margins.brandname.pull-left Newtone
+    .span2.offset7
+      = link_to 'http://brandymint.ru/' do
+        = image_tag image_path('brandymint.png')

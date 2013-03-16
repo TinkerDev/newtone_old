@@ -5,6 +5,7 @@
     - newtone_states.each do |state|
       %div{ :class => "newtone-face newtone-#{state} hidden j-newtone-state" }
   .span6
+<<<<<<< HEAD
     %h1.home-title
       Drop your tunes here.
     %h2.home-title-description
@@ -26,20 +27,49 @@
           .browse-button
             = f.button 'upload file', :class => 'btn btn-large btn-primary record-button'
             = file_field :sample, :upload, :class => 'audio-upload-input', :data => {:url => recognize_path, }
+=======
+    .welcome-block.j-welcome-screen.hide
+      %h1.home-title
+        Drop your tunes here.
+      %h2.home-title-description
+        I'll recognize 'em
+      %ul.nav.nav-tabs.audio-buttons
+        = audio_button :record, :active
+        = audio_button :upload
+      .tab-content.audio-block
+        .tab-pane#record
+          = link_to "javascript:void(0);", :class => 'j-record-button' do
+            .btn.btn-large.btn-success.record-button
+              Record tune
+          = link_to "javascript:void(0);", :class => 'j-record-button hide' do
+            .btn.btn-large.btn-danger.record-button
+              Stop recording
+          %br
+          = link_to_function "Submit", "screenState('processing');", :class => 'btn btn-large btn-primary record-button disabled'
+        .tab-pane#upload
+          = form_for '#' do |f|
+            .browse-button
+              = f.button 'Upload file', :class => 'btn btn-large btn-primary record-button'
+              = file_field :sample, :upload, :class => 'audio-upload-input'
+          .clearfix
+          %br
+          = link_to_function "Submit", "screenState('processing');", :class => 'btn btn-large btn-primary record-button disabled'
+>>>>>>> screens navigation
 
-    -#.btn-group
-      - newtone_states.each do |state|
-        = link_to_function "#{state}", "newtoneFace('#{state}')", :class => 'btn'
-    .j-spinner.hide= spinner
-    %hr.small
-    .results
-      - results = { 'artist' => 'title', 'artist2' => 'title2', 'artist3' => 'title3', 'artist4' => 'title4', 'artist5' => 'title5' }
-      %h2.font-weight-normal What it may be
-      %ul.nav.nav-list.results-list
-        - results.each_pair do |artist, title|
-          %li
-            = link_to 'javascript:void(0);' do
-              %span.artist= artist
-              %span.title= title
-              %span.pull-right= fontello 'right-open', 14, 'v-align-baseline'
 
+    .results-block.j-results-screen.hide
+      %h4.font-weight-normal
+        I think it's
+      %h1.no-margin-bottom.artist=  "Artist"
+      %h2.font-weight-normal.no-margin-top.title= "Title"
+      %hr.small
+      = link_to_function "#{fontello('cw', 16, 'v-align-baseline')} Another tune".html_safe, "screenState('welcome');", :class => "btn btn-large btn-primary"
+      -#.btn-group
+        - newtone_states.each do |state|
+          = link_to_function "#{state}", "newtoneFace('#{state}')", :class => 'btn'
+    .spinner-block.j-processing-screen.hide
+      %h1.pull-left.no-margin-top= "Hmmm&hellip;".html_safe
+      .pull-right= link_to_function "#{fontello('cancel-circled', 24)}".html_safe, "screenState('welcome')", :rel => :tooltip, 'data-original-title' => 'cancel'
+      .clearfix
+      .center-block= spinner
+.clearfix
