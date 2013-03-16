@@ -1,0 +1,91 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          resque<%= application.tr(' -.', '') + rails_env %>
+# Required-Start:    $local_fs $remote_fs $named $network $time
+# Required-Stop:     $local_fs $remote_fs $named $network
+# Should-Start:	     $syslog $postgresql $redis-server
+# X-Start-Before:    $monit
+# X-Stop-After:      $monit
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: <%= application %> resque initscript
+# Description:       resque
+### END INIT INFO
+
+set -e
+
+. /lib/lsb/init-functions
+
+APP_NAME="<%= application %>"
+APP_USER="<%= user %>"
+APP_GROUP="<%= user %>"
+APP_ENV=${APP_ENV:-<%= rails_env %>}
+APP_ROOT=${APP_ROOT:-<%= current_path %>}
+APP_QUEUES="*"
+COUNT=2
+APP_PIDFILE="<%= shared_path %>/pids/resque_worker.%d.pid"
+
+start() {
+	local pidfile
+	local program
+	local options
+
+	if [ `whoami` != $APP_USER ]; then
+		program="/bin/su"
+		options="-l $APP_USER -s /bin/bash -c"
+	else
+		program="/bin/bash"
+		options="-l -c"
+	fi
+
+	for i in $(seq 1 $COUNT); do
+		pidfile=$(printf "$APP_PIDFILE" $i)
+		cmd0="$CMD PIDFILE=$pidfile"
+
+		bash_script="cd $APP_ROOT; bundle exec rake resque:work RAILS_ENV=$APP_ENV QUEUES=$APP_QUEUES BACKGROUND=yes PIDFILE=$pidfile"
+
+		if start-stop-daemon --start --pidfile $pidfile  --chdir $APP_ROOT -n ruby --startas $program -- $options  "$bash_script"
+		then
+			echo "Starting worker #$i ..."
+		else
+			echo "Failed to start worker #$i !"
+		fi
+	done
+}
+
+stop() {
+	local pidfile
+
+	for i in $(seq 1 $COUNT); do
+		pidfile=$(printf "$APP_PIDFILE" $i)
+		if start-stop-daemon --stop --quiet --oknodo --pidfile $pidfile
+		then
+			log_daemon_msg "Stopped Resque worker #$i for $APP_NAME"
+			rm -f $pidfile
+		else
+			log_failure_msg "Failed to stop Resque worker #$i for $APP_NAME!" >&2
+		fi
+	done
+
+}
+
+case "$1" in
+  start)
+      start
+      ;;
+  stop)
+      stop
+      ;;
+  restart)
+      stop
+      sleep 1
+      start
+      ;;
+  *)
+  echo "Usage: $0 <start|stop|restart>" >&2
+  exit 3
+  ;;
+esac
+
+:
+

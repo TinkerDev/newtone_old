@@ -34,3 +34,4 @@ group :development do
   gem 'rvm-capistrano'
 end
 gem "rails_config"
+gem 'resque'
