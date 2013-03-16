@@ -40,3 +40,4 @@ gem "rails_config"
 gem 'resque'
 gem 'rvm'
 gem 'newtone-solr', :git => 'git://github.com/BrandyMint/newtone-solr.git'
+gem 'newtone-fingerprint', :git => 'git://github.com/BrandyMint/newtone-fingerprint.git'

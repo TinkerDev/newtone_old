@@ -6,6 +6,12 @@ GIT
       capistrano (>= 2.0.0)
 
 GIT
+  remote: git://github.com/BrandyMint/newtone-fingerprint.git
+  revision: 16d7519a604a8ae6c2c84ff8e90cc94da5db8143
+  specs:
+    newtone-fingerprint (0.0.1)
+
+GIT
   remote: git://github.com/BrandyMint/newtone-solr.git
   revision: d74a330a9970f9d23347729d8c001ba5af9936d0
   specs:
@@ -287,6 +293,7 @@ DEPENDENCIES
   hub (>= 1.10.2)
   jquery-fileupload-rails
   jquery-rails
+  newtone-fingerprint!
   newtone-solr!
   omniauth (>= 1.1.3)
   omniauth-twitter
