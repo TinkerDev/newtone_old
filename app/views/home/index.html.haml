@@ -5,36 +5,13 @@
     - newtone_states.each do |state|
       %div{ :class => "newtone-face newtone-#{state} hidden j-newtone-state" }
   .span6
-<<<<<<< HEAD
-    %h1.home-title
-      Drop your tunes here.
-    %h2.home-title-description
-      I'll recognize 'em
-    %ul.nav.nav-tabs.audio-buttons
-      = audio_button :record, :active
-      = audio_button :upload
-    %hr.small
-    .tab-content.audio-block
-      .tab-pane.active#record
-        = link_to "javascript:void(0);", :class => 'j-record-button' do
-          .btn.btn-large.btn-success.record-button
-            record tune
-        = link_to "javascript:void(0);", :class => 'j-record-button hide' do
-          .btn.btn-large.btn-danger.record-button
-            stop recording
-      .tab-pane#upload
-        = form_for '#' do |f|
-          .browse-button
-            = f.button 'upload file', :class => 'btn btn-large btn-primary record-button'
-            = file_field :sample, :upload, :class => 'audio-upload-input', :data => {:url => recognize_path, }
-=======
     .welcome-block.j-welcome-screen.hide
       %h1.home-title
         Drop your tunes here.
       %h2.home-title-description
         I'll recognize 'em
       %ul.nav.nav-tabs.audio-buttons
-        = audio_button :record, :active
+        = audio_button :record
         = audio_button :upload
       .tab-content.audio-block
         .tab-pane#record
@@ -49,12 +26,11 @@
         .tab-pane#upload
           = form_for '#' do |f|
             .browse-button
-              = f.button 'Upload file', :class => 'btn btn-large btn-primary record-button'
-              = file_field :sample, :upload, :class => 'audio-upload-input'
+              = f.button 'upload file', :class => 'btn btn-large btn-primary record-button'
+              = file_field :sample, :upload, :class => 'audio-upload-input', :data => {:url => recognize_path, }
           .clearfix
           %br
           = link_to_function "Submit", "screenState('processing');", :class => 'btn btn-large btn-primary record-button disabled'
->>>>>>> screens navigation
 
 
     .results-block.j-results-screen.hide

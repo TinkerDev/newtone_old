@@ -1,7 +1,6 @@
 #= require jquery
 #= require jquery_ujs
 #= require bootstrap
-#= require_tree .
 #= require jquery-fileupload/basic
 
 $ ->
@@ -22,6 +21,7 @@ $ ->
               () -> newtoneFace("normal"),
               1000
             ) 
+  screenState('welcome')
 
 @newtoneFace = (state) ->
   $('.j-newtone-state').removeClass('visible').addClass('hidden')
