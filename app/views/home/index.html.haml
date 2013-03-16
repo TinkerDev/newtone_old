@@ -25,7 +25,7 @@
         .tab-pane#upload
           = form_for '#' do |f|
             .browse-button
-              = f.button 'select file', :class => 'btn btn-large btn-primary record-button'
+              = f.button 'Select tune', :class => 'btn btn-large btn-primary record-button'
               = file_field :sample, :upload, :class => 'audio-upload-input', :data => {:url => recognize_path, }
           .clearfix
           %br
