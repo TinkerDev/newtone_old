@@ -35,3 +35,4 @@ group :development do
 end
 gem "rails_config"
 gem 'resque'
+gem 'rvm'
