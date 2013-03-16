@@ -4,10 +4,10 @@
 #= require_tree .
 
 $ ->
+  $('[rel*="tooltip"]').tooltip()
   $('.j-record-button').on 'click', (e) ->
     e.preventDefault()
     $('.j-record-button').toggleClass('hide')
-  newtoneFace('normal')
 
 @newtoneFace = (state) ->
   $('.j-newtone-state').removeClass('visible').addClass('hidden')
