@@ -22,8 +22,15 @@ $ ->
               () -> newtoneFace("normal"),
               1000
             ) 
+
 @newtoneFace = (state) ->
   $('.j-newtone-state').removeClass('visible').addClass('hidden')
   $('.j-newtone-state.newtone-' + state).removeClass('hidden').addClass('visible')
 
+@screenState = (screen) ->
+  screens= ['.j-welcome-screen', '.j-processing-screen', '.j-results-screen' ]
+  $(screens.join(", ")).each ->
+    if not $(@).hasClass('hide')
+      $(@).addClass('hide')
+  $('.j-'+screen+'-screen').removeClass('hide')
 
