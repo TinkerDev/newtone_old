@@ -29,9 +29,7 @@
               = file_field :sample, :upload, :class => 'audio-upload-input', :data => {:url => recognize_path, }
           .clearfix
           %br
-          = link_to_function "Submit", "screenState('processing');", :class => 'btn btn-large btn-primary record-button disabled'
-
-
+          = link_to "Submit", "#", :class => 'btn btn-large btn-primary record-button disabled'
     .results-block.j-results-screen.hide
       .row
         .span4

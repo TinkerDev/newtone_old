@@ -11,16 +11,22 @@ $ ->
 
   $("#sample_upload").fileupload
     add:(e, data)->
-      jqXHR = data.submit()
-        .success (result, textStatus, jqXHR) ->
-          if result != "null"
-            state = result.status == 1 ? "good" : "bad"
-            state = "bad"
-            newtoneFace(state)
-            setTimeout(
-              () -> newtoneFace("normal"),
-              1000
-            ) 
+      data.context = $("#upload a.record-button").removeClass("disabled").click ->
+        screenState('processing')
+        jqXHR = data.submit()
+          .success (result, textStatus, jqXHR) ->
+            if result != "null"
+              state = result.status == 1 ? "good" : "bad"
+              newtoneFace(state)
+              setTimeout(
+                () -> newtoneFace("normal"),
+                1000
+              )
+              screenState('results')
+          .error (jqXHR, textStatus, errorThrown) ->
+            screenState('welcome')
+    always: (e, date)->
+      $("#upload a.record-button").addClass("disabled")
   screenState('welcome')
 
 @newtoneFace = (state) ->
