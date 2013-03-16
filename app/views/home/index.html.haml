@@ -6,9 +6,8 @@
       %div{ :class => "newtone-face newtone-#{state} hidden j-newtone-state" }
   .span6
     .welcome-block.j-welcome-screen.hide
-      %h1.home-title
-        Drop your tunes here.
-      %h2.home-title-description
+      %h1.home-title= "&mdash; I recognize music.".html_safe
+      -#%h2.home-title-description
         I'll recognize 'em
       %ul.nav.nav-tabs.audio-buttons
         = audio_button :record
@@ -34,15 +33,14 @@
 
 
     .results-block.j-results-screen.hide
-      %h4.font-weight-normal
-        I think it's
-      %h1.no-margin-bottom.artist=  "Artist"
-      %h2.font-weight-normal.no-margin-top.title= "Title"
-      %hr.small
-      = link_to_function "#{fontello('cw', 16, 'v-align-baseline')} Another tune".html_safe, "screenState('welcome');", :class => "btn btn-large btn-primary"
-      -#.btn-group
-        - newtone_states.each do |state|
-          = link_to_function "#{state}", "newtoneFace('#{state}')", :class => 'btn'
+      .row
+        .span4
+          %h4.font-weight-normal
+            I think it's
+          %h1.no-margin-bottom.artist.j-artist=  "Artist"
+          %h2.font-weight-normal.no-margin-top.title.j-title= "Title"
+        .span2
+          = audio_button :new
     .spinner-block.j-processing-screen.hide
       %h1.pull-left.no-margin-top= "Hmmm&hellip;".html_safe
       .pull-right= link_to_function "#{fontello('cancel-circled', 24)}".html_safe, "screenState('welcome')", :rel => :tooltip, 'data-original-title' => 'cancel'

@@ -34,3 +34,6 @@ $ ->
       $(@).addClass('hide')
   $('.j-'+screen+'-screen').removeClass('hide')
 
+@resultsOutput = (artist, title)->
+  $('.j-author').html(artist)
+  $('.j-title').html(title)

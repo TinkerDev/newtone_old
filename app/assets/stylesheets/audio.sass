@@ -16,25 +16,15 @@
       bottom: 20px
       left: 0
       right: 0
+    text-align: center
     margin: 0
-    & > a
-      display: block
-      margin: 0 auto
-      text-shadow: 0 1px 0 $white
-      text-align: center
-      +link-colors($textColor, $white)
-      width: 64px
-      height: 64px
-      padding: 20px 10px 0 10px
-      +border-radius(42px)
-      background: darken($bodyBackground, 10%)
-      +box-shadow(inset 0 1px 1px rgba($black, 0.2))
-      &:hover
-        color: $redBrandColor
-        background: darken($bodyBackground, 5%)
-      +transition(background 0.2s ease, color 0.2s ease)
+    &, &.active
+      &, &:hover, a, a:hover
+        border-bottom: 0
+    & .audio-button-link
+      @extend .round-link
     &.active
-      & > a
+      & .audio-button-link
         color: $white
         border-bottom: 0
         background: $redBrandColor
@@ -43,6 +33,28 @@
           color: $white
           border-bottom: 0
           background: $redBrandColor
+.audio-button-caption
+  @extend small
+  padding-top: 10px
+  color: $gray
+  text-align: center
+
+.round-link
+  display: block
+  margin: 0 auto
+  text-shadow: 0 1px 0 $white
+  text-align: center
+  +link-colors($textColor, $white)
+  width: 64px
+  height: 64px
+  padding: 20px 10px 0 10px
+  +border-radius(42px)
+  background: darken($bodyBackground, 10%)
+  +box-shadow(inset 0 1px 1px rgba($black, 0.2))
+  &:hover
+    color: $redBrandColor
+    background: darken($bodyBackground, 5%)
+    +transition(background 0.2s ease, color 0.2s ease)
 
 
 .audio-button-icon

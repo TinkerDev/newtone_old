@@ -4,14 +4,18 @@ module ButtonsHelper
     button = ''
     case type
       when :record
-        button = fontello 'mic', '', css_class
-        tooltip = 'record sample to recognize'
+        button = content_tag(:div, "#{fontello('mic', '', css_class)}".html_safe, :class => 'audio-button-link')
+        tooltip = content_tag(:div, 'Record sample', :class => 'audio-button-caption')
       when :upload
-        button = fontello 'upload', '', css_class
-        tooltip = 'upload file to recognize'
+        button = content_tag(:div, "#{fontello('upload', '', css_class)}".html_safe, :class => 'audio-button-link')
+        tooltip = content_tag(:div, 'Upload file', :class => 'audio-button-caption')
+      when :new
+        button = content_tag(:div, "#{fontello('cw', '', css_class)}".html_safe, :class => 'round-link')
+        tooltip = content_tag(:div, 'Another tune', :class => 'audio-button-caption center-block')
+        return link_to_function("#{button} #{tooltip}".html_safe, "screenState('welcome');")
     end
     content_tag :li, :class => "audio-button #{state}" do
-      link_to button, "##{type}", 'data-toggle' => 'tab', :rel => "tooltip", 'data-original-title' => tooltip 
+      link_to( "#{button} #{tooltip}".html_safe, "##{type}", 'data-toggle' => 'tab')
     end
   end
 
