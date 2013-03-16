@@ -1,0 +1,26 @@
+development:
+  host: localhost
+  adapter: postgresql
+  encoding: unicode
+  database: newtone_development
+  pool: 5
+  username: unloved
+  password:
+
+test:
+  host: localhost
+  adapter: postgresql
+  encoding: unicode
+  database: newtone_test
+  pool: 5
+  username: unloved
+  password:
+
+production:
+  host: localhost
+  adapter: postgresql
+  encoding: unicode
+  database: newtone_production
+  pool: 5
+  username: unloved
+  password:
