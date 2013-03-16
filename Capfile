@@ -8,12 +8,12 @@ namespace :solr do
   desc "Выполняет rake sunspot:reindex"
   task :restart do
     begin
-      run("cd #{deploy_to}/current && /usr/bin/env rake sunspot:solr:stop RAILS_ENV=#{rails_env}")
+      run("cd #{deploy_to}/current && /usr/bin/env rake newtone:solr:stop RAILS_ENV=#{rails_env}")
     rescue Exception => error
       puts "***Unable to stop Solr with error: #{error}"
       puts "***Solr may have not been started. Continuing anyway.***"
     end
-    run("cd #{deploy_to}/current && /usr/bin/env rake sunspot:solr:start RAILS_ENV=#{rails_env}")
+    run("cd #{deploy_to}/current && /usr/bin/env rake newtone:solr:start RAILS_ENV=#{rails_env}")
   end
 
   desc "Запускает фонове выполнение rake sunspot:reindex"
