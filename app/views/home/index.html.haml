@@ -25,7 +25,7 @@
         = form_for '#' do |f|
           .browse-button
             = f.button 'upload file', :class => 'btn btn-large btn-primary record-button'
-            = file_field :sample, :upload, :class => 'audio-upload-input'
+            = file_field :sample, :upload, :class => 'audio-upload-input', :data => {:url => recognize_path, }
 
     -#.btn-group
       - newtone_states.each do |state|
