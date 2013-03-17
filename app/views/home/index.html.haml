@@ -41,7 +41,7 @@
           = audio_button :new
     .spinner-block.j-processing-screen.hide
       %h1.pull-left.no-margin-top= "Hmmm&hellip;".html_safe
-      .pull-right= link_to_function "#{fontello('cancel-circled', 24)}".html_safe, "screenState('welcome')", :rel => :tooltip, 'data-original-title' => 'cancel'
+      .pull-right= link_to "#{fontello('cancel-circled', 24)}".html_safe, "#", :rel => :tooltip, :id => "cancel", 'data-original-title' => 'cancel'
       .clearfix
       .center-block= spinner
 .clearfix
