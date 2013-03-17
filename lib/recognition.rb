@@ -8,22 +8,25 @@ class Recognition
 
 
   def recognize elbow=10
-    make_raw_fingerprint
-    extract_compressed_data_string
-    decompress_compressed_data_string
-    parse_actual_data_string
+    common_parse_flow
     clean_codes_by_time
     do_solr_query
   end
 
   def friendly_recognize elbow=10
     response = recognize['response']
-    if response['numFound'] > 0
-      docs = response['docs']
-      {:artist => docs[0]['artist'], :track => docs[0]['track'], :status => 1 }
-    else
-      nil
-    end
+    SolrQuery.human_response response
+  end
+
+  def common_parse_flow
+    make_raw_fingerprint
+    extract_compressed_data_string
+    decompress_compressed_data_string
+    parse_actual_data_string
+  end
+
+  def solr_final_string
+    @codes.zip(@timestamps).flatten.join(' ').encode('utf-8')
   end
 
   private
@@ -55,14 +58,8 @@ class Recognition
     @codes = chunker(raw_codes, 5).map{|el| el.join('').to_i(16)}
   end
 
-  def solr_query_string
-    @codes.zip(@timestamps).flatten.join(' ').encode('utf-8')
-  end
-
   def do_solr_query
-    solr = RSolr.connect :url => 'http://localhost:8502/solr/fp'
-    params = {:q => solr_query_string, :fl=>'*,score', :qt => "/hashq", :wt => :standard, :rows=>30, :version=>'2.2', :echoParams=>:none}
-    solr.post 'select', :data=>params
+    SolrQuery.do_solr_query solr_final_string
   end
 
   def chunker(seq, size)
