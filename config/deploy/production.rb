@@ -5,5 +5,5 @@ set :rails_env, "production"
 #set :application, "newtone.name"
 #set :user,      'wwwswap'
 #require 'airbrake/capistrano'
-before 'deploy:restart', 'solr:stop'
+before 'deploy:update_code', 'solr:stop'
 after 'deploy:restart', 'solr:start'
