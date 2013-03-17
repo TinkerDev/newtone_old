@@ -21,12 +21,12 @@ $ ->
               resultsOutput('success!', result.artist, result.track)
               screenState('results')
             else
-              resultsOutput("Not found")
+              resultsOutput("","Oops&hellip;","I don't know anything similar.")
               screenState('results')
               newtoneFace('bad')
             $("#upload a.record-button").unbind('click')
           .error (jqXHR, textStatus, errorThrown) ->
-            screenState('welcome')
+            screenState('error')
             $("#upload a.record-button").unbind('click')
     
     always: (e, date)->
@@ -39,7 +39,7 @@ $ ->
   $('.j-newtone-state.newtone-' + state).removeClass('hidden').addClass('visible')
 
 @screenState = (screen) ->
-  screens= ['.j-welcome-screen', '.j-processing-screen', '.j-results-screen' ]
+  screens= ['.j-welcome-screen', '.j-processing-screen', '.j-results-screen', '.j-error-screen' ]
   $(screens.join(", ")).each ->
     if not $(@).hasClass('hide')
       $(@).addClass('hide')

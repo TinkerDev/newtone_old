@@ -44,4 +44,10 @@
       .pull-right= link_to "#{fontello('cancel-circled', 24)}".html_safe, "#", :rel => :tooltip, :id => "cancel", 'data-original-title' => 'cancel'
       .clearfix
       .center-block= spinner
+    .results-block.j-error-screen.hide
+      %h4.font-weight-normal.j-message
+      %h1.no-margin-bottom.artist.j-artist=  "Ooops"
+      %h2.font-weight-normal.no-margin-top.title.j-title= "Something went very very very wrong"
+      %hr.small
+      %h3.font-weight-normal= link_to "#{fontello('left-circled', 24)} Go back".html_safe, "#"
 .clearfix
