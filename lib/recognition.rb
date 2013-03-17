@@ -9,7 +9,7 @@ class Recognition
 
   def recognize elbow=10
     common_parse_flow
-    clean_codes_by_time
+    #clean_codes_by_time
     do_solr_query
   end
 
