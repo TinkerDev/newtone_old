@@ -45,7 +45,7 @@ $ ->
       $(@).addClass('hide')
   $('.j-'+screen+'-screen').removeClass('hide')
 
-@resultsOutput = (message, artist=null, title=null)->
-  #$('.j-message').html(message)
+@resultsOutput = (message=null, artist=null, title=null)->
+  $('.j-message').html(message) if message != null
   $('.j-artist').html(artist)
   $('.j-title').html(title)
