@@ -12,7 +12,7 @@ module ButtonsHelper
       when :new
         button = content_tag(:div, "#{fontello('cw', '', css_class)}".html_safe, :class => 'round-link')
         tooltip = content_tag(:div, 'Another tune', :class => 'audio-button-caption center-block')
-        return link_to_function("#{button} #{tooltip}".html_safe, "screenState('welcome');")
+        return link_to_function("#{button} #{tooltip}".html_safe, "screenState('welcome'); newtoneFace('normal');")
     end
     content_tag :li, :class => "audio-button #{state}" do
       link_to( "#{button} #{tooltip}".html_safe, "##{type}", 'data-toggle' => 'tab')

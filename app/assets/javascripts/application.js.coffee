@@ -16,23 +16,14 @@ $ ->
         jqXHR = data.submit()
           .success (result, textStatus, jqXHR) ->
             if result != null
-              console.log 1
-              state = result.status == 1 ? "good" : "bad"
+              state = if result.status == 1 then "good" else "bad"
               newtoneFace(state)
-              setTimeout(
-                () -> newtoneFace("normal"),
-                1000
-              )
               resultsOutput('success!', result.artist, result.track)
               screenState('results')
             else
               resultsOutput("Not found")
               screenState('results')
               newtoneFace('bad')
-              setTimeout(
-                () -> newtoneFace("normal"),
-                1000
-              )
             $("#upload a.record-button").unbind('click')
           .error (jqXHR, textStatus, errorThrown) ->
             screenState('welcome')
@@ -55,6 +46,6 @@ $ ->
   $('.j-'+screen+'-screen').removeClass('hide')
 
 @resultsOutput = (message, artist=null, title=null)->
-  $('.j-message').html(message)
-  $('.j-author').html(artist)
+  #$('.j-message').html(message)
+  $('.j-artist').html(artist)
   $('.j-title').html(title)
