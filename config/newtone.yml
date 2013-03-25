@@ -3,7 +3,7 @@ production:
     hostname: localhost
     port: 8502
     log_level: WARNING
-    path: /solr/newtone-production
+    data_path: /home/wwwnewtone/newtone.name/shared/solr
 
 development:
   solr:
