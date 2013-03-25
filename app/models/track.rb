@@ -9,7 +9,7 @@ class Track < ActiveRecord::Base
     raw_fingerprint = fingerprint.raw_fingerprint
     code = raw_fingerprint["code"]
     m = raw_fingerprint["metadata"]
-    trid = 'TRLJNAF13D75CE63E1'
+    trid = Digest::MD5.hexdigest(Time.now.to_s(:db))
     length = m["duration"]
     version = m["version"]
     artist = m["artist"]
