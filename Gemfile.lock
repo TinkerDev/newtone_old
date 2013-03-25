@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: git://github.com/BrandyMint/newtone-solr.git
-  revision: 4a91f73156be30edd6bd51fb409f55512f78eaeb
+  revision: 904498b06d4af4a5b872355af5779144baa3480d
   specs:
     newtone-solr (0.0.1)
       escape (~> 0.0.4)
