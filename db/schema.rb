@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130316235731) do
+ActiveRecord::Schema.define(:version => 20130326132150) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -61,7 +61,16 @@ ActiveRecord::Schema.define(:version => 20130316235731) do
     t.string   "track_file"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "track_id"
+    t.string   "artist"
+    t.string   "title"
+    t.string   "release"
+    t.string   "genre"
+    t.string   "version"
   end
+
+  add_index "tracks", ["artist"], :name => "index_tracks_on_artist"
+  add_index "tracks", ["title"], :name => "index_tracks_on_title"
 
   create_table "users", :force => true do |t|
     t.string   "name"
