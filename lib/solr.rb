@@ -21,14 +21,7 @@ class Solr
   end
 
   def self.add_track track
-    solr_data = {
-      "fp" => track.fingerprint.solr_string,
-      "track_id" => track.track_id,
-      "length" => track.duration,
-      "codever" => track.version,
-      'source' => 'local',
-      'import_date' => Time.now.strftime("%Y-%m-%dT%H:%M:%SZ")
-    }
+    solr_data = { "fp" => track.fingerprint.solr_string, "track_id" => track.track_id }
 
     documents = self.split_data_to_documents(solr_data)
 
@@ -94,12 +87,7 @@ class Solr
       key = "#{trid}-#{i}"
 
 
-      segment = {"track_id"=> key,
-                 "fp" => pairs[sindex..eindex].map{|p| p[1]}.join(' '),
-                 "length"=> solr_data["length"],
-                 'source' => solr_data['source'],
-                 'import_date' => solr_data['import_date'],
-                 "codever"=> solr_data["codever"]}
+      segment = {"track_id"=> key, "fp" => pairs[sindex..eindex].map{|p| p[1]}.join(' ')}
       ret << segment
     end
     ret
