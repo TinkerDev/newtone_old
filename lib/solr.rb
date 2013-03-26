@@ -5,7 +5,7 @@ class Solr
   end
 
   def self.search query
-    params = {:q => query, :fl=>'*,score', :qt => "/hashq", :wt => :standard, :rows=>30, :version=>'2.2', :echoParams=>:none}
+    params = {:q => query, :fl=>'track_id,score', :qt => "/hashq", :wt => :standard, :rows=>30, :version=>'2.2', :echoParams=>:none}
     self.solr.post 'select', :data=>params
   end
 
@@ -13,7 +13,8 @@ class Solr
     #puts if top_match_score < code_len * 0.05:
     if response['docs'].any?
       docs = response['docs']
-      {:artist => docs[0]['artist'], :track => docs[0]['track'], :status => 1 }
+      track = Track.find_by_track_id docs[0]['track_id'].split('-').first
+      {:artist => track.artist, :track => track.title, :status => 1 }
     else
       nil
     end
@@ -21,13 +22,12 @@ class Solr
 
   def self.add_track track
     solr_data = {
-        "fp" => track.fingerprint.solr_string,
-        "track_id" => track.track_id,
-        "length" => track.duration,
-        "codever" => track.version,
-        'artist' => track.artist,
-        'title' => track.title,
-        'release' => track.release
+      "fp" => track.fingerprint.solr_string,
+      "track_id" => track.track_id,
+      "length" => track.duration,
+      "codever" => track.version,
+      'source' => 'local',
+      'import_date' => Time.now.strftime("%Y-%m-%dT%H:%M:%SZ")
     }
 
     documents = self.split_data_to_documents(solr_data)
@@ -36,13 +36,14 @@ class Solr
     self.solr.commit
   end
 
-  def self.update_track track
-
-  end
-
   def self.delete_track track
     solr.delete_by_query("track_id:[#{track.track_id} *]")
     solr.commit
+  end
+
+  def self.track_docs track
+    response = self.solr.get 'select', :params =>  {:q => "track_id:#{track.track_id}*", :fl=>'*, fp'}
+    docs = response['response']['docs']
   end
 
 
@@ -96,12 +97,9 @@ class Solr
       segment = {"track_id"=> key,
                  "fp" => pairs[sindex..eindex].map{|p| p[1]}.join(' '),
                  "length"=> solr_data["length"],
-                 'source' => 'local',
-                 'import_date' => Time.now.strftime("%Y-%m-%dT%H:%M:%SZ"),
+                 'source' => solr_data['source'],
+                 'import_date' => solr_data['import_date'],
                  "codever"=> solr_data["codever"]}
-      ["artist", 'release', 'track', 'source', 'import_date'].each do |key|
-        segment[key] = solr_data[key] if solr_data.has_key?(key)
-      end
       ret << segment
     end
     ret

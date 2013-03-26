@@ -20,13 +20,15 @@ class Track < ActiveRecord::Base
     if self.fingerprint.present?
       Solr.delete_track(self)
       Solr.add_track(self)
-    else
-      Solr.update_track(self)
     end
   end
 
   def delete_solr
     Solr.delete_track(self)
+  end
+
+  def solr_documents
+    Solr.track_docs(self)
   end
 
 end
