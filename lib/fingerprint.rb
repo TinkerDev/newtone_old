@@ -2,8 +2,13 @@ class Fingerprint
   attr_reader :fingerprint, :compressed_data_string,
               :actual_data_string, :timestamps, :codes
 
-  def initialize audio_file_path
-    @fingerprint = Newtone::Fingerprint.build audio_file_path
+  def initialize audio_file_path_or_fingerprint
+    if audio_file_path_or_fingerprint.is_a? Hash
+      @fingerprint = audio_file_path_or_fingerprint
+    else
+      @fingerprint = Newtone::Fingerprint.build audio_file_path_or_fingerprint
+    end
+
     extract_compressed_data_string
     decompress_compressed_data_string
     parse_actual_data_string
