@@ -7,13 +7,13 @@ class Recognition
   def recognize elbow=10
     @fingerprint = Fingerprint.new @audio_file_path
     #clean_codes_by_time
-    SolrQuery.do_solr_query @fingerprint.solr_string
+    Solr.search @fingerprint.solr_string
     #solr_final_string
   end
 
   def friendly_recognize elbow=10
     response = recognize['response']
-    SolrQuery.human_response response
+    Solr.human_response response
   end
 
   private

@@ -5,6 +5,7 @@ class AddFieldsToTrack < ActiveRecord::Migration
     add_column :tracks, :title, :string
     add_column :tracks, :release, :string
     add_column :tracks, :genre, :string
+    add_column :tracks, :duration, :string
     add_column :tracks, :version, :string
     add_index :tracks, :artist
     add_index :tracks, :title

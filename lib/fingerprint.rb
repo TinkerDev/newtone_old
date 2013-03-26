@@ -1,22 +1,34 @@
 class Fingerprint
-  attr_reader :raw_fingerprint, :compressed_data_string,
+  attr_reader :fingerprint, :compressed_data_string,
               :actual_data_string, :timestamps, :codes
 
   def initialize audio_file_path
-    @raw_fingerprint = Newtone::Fingerprint.build audio_file_path
+    @fingerprint = Newtone::Fingerprint.build audio_file_path
     extract_compressed_data_string
     decompress_compressed_data_string
     parse_actual_data_string
   end
 
   def solr_string
-    @codes.zip(@timestamps).flatten.join(' ').encode('utf-8')
+    @codes.zip(@timestamps).flatten.join(' ')#.encode('utf-8')
+  end
+
+  def code
+    @fingerprint["code"]
+  end
+
+  def metadata
+    @fingerprint["metadata"]
+  end
+
+  [:artist, :title, :release, :genre, :duration, :version].each do |meta_info|
+    define_method(meta_info) { metadata[meta_info.to_s] }
   end
 
   private
 
   def extract_compressed_data_string
-    @compressed_data_string = @raw_fingerprint['code'].encode("utf-8")
+    @compressed_data_string = @fingerprint['code'].encode("utf-8")
   end
 
   def decompress_compressed_data_string

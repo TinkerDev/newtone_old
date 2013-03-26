@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(:version => 20130326132150) do
     t.string   "title"
     t.string   "release"
     t.string   "genre"
+    t.string   "duration"
     t.string   "version"
   end
 
