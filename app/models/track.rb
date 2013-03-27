@@ -1,7 +1,7 @@
 class Track < ActiveRecord::Base
   attr_accessor :raw_fingerprint
   attr_reader :fingerprint
-  attr_accessible :track_file, :track_id, :artist, :title, :release, :genre, :duration, :version
+  attr_accessible :track_file, :raw_fingerprint, :track_id, :artist, :title, :release, :genre, :duration, :version
   mount_uploader :track_file, TrackUploader
   validates :track_file, :presence => true, :if => Proc.new { |t| t.raw_fingerprint.blank? }, :on => :create
   validates :raw_fingerprint, :presence => true, :if => Proc.new { |t| t.track_file.blank? }, :on => :create

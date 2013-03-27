@@ -26,8 +26,12 @@ class Fingerprint
     @fingerprint["metadata"]
   end
 
-  [:artist, :title, :release, :genre, :duration, :version].each do |meta_info|
+  [:artist, :title, :release, :genre, :version].each do |meta_info|
     define_method(meta_info) { metadata[meta_info.to_s] }
+  end
+
+  def duration
+    metadata['duration'].to_i
   end
 
   private
