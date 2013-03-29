@@ -9,17 +9,6 @@ class Solr
     self.solr.post 'select', :data=>params
   end
 
-  def self.human_response response
-    #puts if top_match_score < code_len * 0.05:
-    if response['docs'].any?
-      docs = response['docs']
-      track = Track.find_by_track_id docs[0]['track_id'].split('-').first
-      {:artist => track.artist, :track => track.title, :status => 1 }
-    else
-      nil
-    end
-  end
-
   def self.add_track track
     solr_data = { "fp" => track.fingerprint.solr_string, "track_id" => track.track_id }
 
