@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-gem 'rails', '3.2.12'
+gem 'rails', '~> 3.2.13'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'compass-rails'
@@ -35,11 +35,10 @@ gem 'rsolr'
 group :development do
   gem 'capistrano'
   gem 'capistrano-recipes0', '>= 1.1.0', :git => 'git://github.com/BrandyMint/capistrano-recipes0.git'
-  gem 'rvm-capistrano'
+  gem 'holepicker', :require => false
 end
 gem "rails_config"
 gem 'resque'
-gem 'rvm'
 gem 'newtone-solr', :git => 'git://github.com/BrandyMint/newtone-solr.git'
 gem 'newtone-fingerprint', :git => 'git://github.com/BrandyMint/newtone-fingerprint.git'
 gem 'rsolr'

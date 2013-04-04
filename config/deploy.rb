@@ -1,5 +1,5 @@
 set :stages, %w(production staging)
-set :default_stage, "staging"
+set :default_stage, "production"
 require 'capistrano/ext/multistage'
 
 set :application, "newtone.name"
@@ -17,18 +17,13 @@ set :use_sudo,   false
 set :keep_releases, 5
 set :shared_children, fetch(:shared_children) + %w(public/uploads)
 
-set :rvm_ruby_string, "1.9.3-p392"
-set :rvm_type, :user
-
-before 'deploy:setup', 'rvm:install_rvm'
-before 'deploy:setup', 'rvm:install_ruby'
 before 'deploy:restart', 'deploy:migrate'
 after 'deploy:restart', "deploy:cleanup"
 
 #RVM, Bundler
-require "rvm/capistrano"
+load 'deploy/assets'
 require "bundler/capistrano"
-require "recipes0/assets"
+require "holepicker/capistrano"
 require "recipes0/database_yml"
 require "recipes0/db/pg"
 require "recipes0/init_d/unicorn"
