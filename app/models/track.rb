@@ -1,14 +1,16 @@
 class Track < ActiveRecord::Base
   attr_accessor :raw_fingerprint
   attr_reader :fingerprint
-  attr_accessible :track_file, :raw_fingerprint, :track_id, :artist, :title, :release, :genre, :duration, :version
+  attr_accessible :track_file, :raw_fingerprint, :track_id, :title, :release, :genre, :duration, :version
   mount_uploader :track_file, TrackUploader
+
   validates :track_file, :presence => true, :if => Proc.new { |t| t.raw_fingerprint.blank? }, :on => :create
   validates :raw_fingerprint, :presence => true, :if => Proc.new { |t| t.track_file.blank? }, :on => :create
   before_save :get_fingerprint_info
   after_save :update_solr
   after_save :remove_track_file!
   after_destroy :delete_solr
+  belongs_to :artist, :counter_cache => true
 
 
   def get_fingerprint_info

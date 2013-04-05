@@ -44,3 +44,8 @@ gem 'newtone-fingerprint', :git => 'git://github.com/BrandyMint/newtone-fingerpr
 gem 'rsolr'
 gem 'carrierwave'
 gem 'activeadmin'
+gem 'lastfm'
+gem 'vk_api',:git=>'git://github.com/twinslash/vk-ruby.git'
+gem 'mechanize'
+gem 'foreverb'
+gem 'airbrake'

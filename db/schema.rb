@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130327082738) do
+ActiveRecord::Schema.define(:version => 20130405130524) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -46,6 +46,16 @@ ActiveRecord::Schema.define(:version => 20130327082738) do
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
 
+  create_table "artists", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+    t.integer  "tracks_count", :default => 0, :null => false
+  end
+
+  add_index "artists", ["name"], :name => "index_artists_on_name"
+  add_index "artists", ["tracks_count"], :name => "index_artists_on_tracks_count"
+
   create_table "roles", :force => true do |t|
     t.string   "name"
     t.integer  "resource_id"
@@ -62,15 +72,15 @@ ActiveRecord::Schema.define(:version => 20130327082738) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "track_id"
-    t.string   "artist"
     t.string   "title"
     t.string   "release"
     t.string   "genre"
     t.string   "version"
     t.integer  "duration"
+    t.integer  "artist_id",  :null => false
   end
 
-  add_index "tracks", ["artist"], :name => "index_tracks_on_artist"
+  add_index "tracks", ["artist_id"], :name => "index_tracks_on_artist_id"
   add_index "tracks", ["title"], :name => "index_tracks_on_title"
   add_index "tracks", ["track_id"], :name => "index_tracks_on_track_id", :unique => true
 
@@ -89,5 +99,12 @@ ActiveRecord::Schema.define(:version => 20130327082738) do
   end
 
   add_index "users_roles", ["user_id", "role_id"], :name => "index_users_roles_on_user_id_and_role_id"
+
+  create_table "vk_tokens", :force => true do |t|
+    t.string   "access_token"
+    t.datetime "expires_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
 end

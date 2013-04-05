@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+require File.expand_path('../../config/foreverb', __FILE__)
+
+Forever.run :fork=>true do
+  extend ForeverbConfig
+  init_foreverb_config 'foreverb-cron'
+
+  every 1.day
+    puts 'LastParser merge top artist...'
+    LastParser.merge_top_artists
+  end
+end
