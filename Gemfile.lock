@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/BrandyMint/capistrano-recipes0.git
-  revision: fea3e8e3f4f02cf2b4ab190bef09632c66581229
+  revision: 3049e63b43ef95461aa4669697c37b92635e7943
   specs:
     capistrano-recipes0 (1.1.3)
       capistrano (>= 2.0.0)
