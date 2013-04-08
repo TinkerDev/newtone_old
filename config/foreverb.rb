@@ -22,7 +22,7 @@ module ForeverbConfig
       puts "File: #{file} #{filename}"
 
       if file=~/wwwnewtone/
-        deploy_dir = '/home/wwwdata/blogs.investcafe.ru'
+        deploy_dir = '/home/wwwnewtone/newtone.name'
         puts "Foreverb deploy directory: #{deploy_dir}"
         dir "#{deploy_dir}/current/"
         file "#{deploy_dir}/current/script/#{filename}"
