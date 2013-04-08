@@ -8,3 +8,4 @@ set :rails_env, "production"
 before 'deploy:update_code', 'solr:stop'
 after 'deploy:restart', 'solr:start'
 require "recipes0/init_d/foreverb"
+require 'airbrake/capistrano'
