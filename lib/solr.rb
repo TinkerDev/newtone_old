@@ -14,13 +14,13 @@ class Solr
 
     documents = self.split_data_to_documents(solr_data)
 
-    self.solr.add documents
-    self.solr.commit
+    solr.add documents
+    solr.commit
   end
 
   def self.delete_track track
-    solr.delete_by_query("track_id:[#{track.track_id} *]")
-    solr.commit
+    self.solr.delete_by_query("track_id:[#{track.track_id} *]")
+    self.solr.commit
   end
 
   def self.track_docs track
@@ -80,5 +80,14 @@ class Solr
       ret << segment
     end
     ret
+  end
+
+  def self.destroy_all
+    self.solr.delete_by_query("track_id:[ * TO *]")
+    self.solr.commit
+  end
+
+  def self.optimize
+    self.solr.optimize
   end
 end

@@ -34,6 +34,31 @@ class Fingerprint
     metadata['duration'].to_i
   end
 
+  def clean_codes_by_time
+    #Remove all codes from a codes that are > 60 seconds in length.
+    #Because we can only match 60 sec, everything else is unnecessary
+
+
+    # If we use the codegen on a file with start/stop times, the first timestamp
+    # is ~= the start time given. There might be a (slightly) earlier timestamp
+    # in another band, but this is good enough
+=begin
+    first_timestamp = @timestamps[1]
+
+    sixty_seconds = (60.0 * 1000.0 / 23.2 + first_timestamp).to_i
+    timestamps = codes = []
+
+    @timestamps.each_with_index do |timestamp, index|
+      if timestamp <= sixty_seconds
+        timestamps << timestamp
+        codes << index
+      end
+    end
+
+    @timestamps, @codes = timestamps, codes
+=end
+  end
+
   private
 
   def extract_compressed_data_string
@@ -46,6 +71,9 @@ class Fingerprint
   end
 
   def parse_actual_data_string
+    if @actual_data_string.nil?
+      raise FingerprintError, 'actual string is nil'
+    end
     # Takes an uncompressed data string consisting of 0-padded fixed-width
     # sorted hex and converts it to the standard code string."""
     n = (@actual_data_string.length / 10.0).to_i

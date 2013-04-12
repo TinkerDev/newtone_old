@@ -8,8 +8,7 @@ class Parser
     #app.audio.search :q=>'gaga'
 
 
-    session = ::VkApi::Session.new(Settings.vk.app_id, Settings.vk.app_secret)
-    session.audio.search :q => 'gaga', :access_token => VkToken.get_token
+
 
     #session = ::VkApi::Session.new s1, s2
     #require 'open-uri'
@@ -25,15 +24,32 @@ class Parser
 
   end
 
-  def self.get_token
-    model = VkToken.first
-    if model.nil? or model.expires_at <= Time.now
-      model = VkToken.create_new_token
-    end
-    model.access_token
+  def self.merge_artists_from_lastfm_chart_top_artist
+    artists = LastfmLibrary.get_chart_top_artists
+    artists.map{|a| artist = Artist.find_or_create_by_name(a[:name]); artist.update_attribute(:mbid, a[:mbid]) }
   end
 
-  def self.get_new_artist
+  def self.merge_tracks_from_lastfm_chart_top_tracks
+    tracks = LastfmLibrary.get_chart_top_tracks
 
+    tracks = tracks.inject([]) do |res, t|
+      artist = t['artist']
+      artist = Artist.find_or_create_by_name(artist['name'])
+      artist.update_attribute(:mbid, artist['mbid'])
+      if t['duration'].is_a? String
+        res << {:title=>t['name'], :artist=>artist, :duration=>(t['duration'].to_i) }
+      end
+      res
+    end
+
+    tracks.inject([]) do |res, track|
+      vk_track = VkLibrary.find_track(track[:artist].name, track[:title], track[:duration])
+      if vk_track
+        res << Track.create(:title => track[:title], :artist => track[:artist], :remote_track_file_url => vk_track['url'])
+      end
+      res
+    end
+
+  end
 
 end

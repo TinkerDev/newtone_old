@@ -1,0 +1,3 @@
+class FingerprintError < StandardError
+
+end
