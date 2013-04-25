@@ -1,0 +1,6 @@
+.spinner-block.j-processing-screen.hide
+  %h1.newtone-speach.pull-left
+    = t('newtone_speach.processing').html_safe
+  .pull-right= link_to "#{fontello('cancel-circled', 24)}".html_safe, "javascript:void(0)", :rel => :tooltip, :id => "cancel_processing", 'data-original-title' => t('cancel_processing')
+  .clearfix
+  .center-block= spinner

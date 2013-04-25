@@ -1,0 +1,17 @@
+ru:
+  audio_sources:
+    upload_file: Загрузить файл
+    record_sample: Записать аудио
+    upload:
+      select: Выбрать файл
+      submit: Распознать
+  newtone_speach:
+    welcome: "&mdash; я узнаю музыку"
+    processing: "&mdash; хмм....."
+    results: "&mdash; я знаю!"
+    error: "&mdash; ой, что то пошло не так!"
+
+  cancel_processing: отменить
+  recognize_new_track: распознать еще
+  go_back: назад
+  error: Ваше яблоко полетело вверх!<br> К такому наc жизнь не готовила, попробуйте обновить страницу, может гравитация сработает в следующий раз.

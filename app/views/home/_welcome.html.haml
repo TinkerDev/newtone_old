@@ -1,0 +1,27 @@
+.welcome-block.j-welcome-screen
+  %h1.newtone-speach.pull-left
+    = t('newtone_speach.welcome').html_safe
+  %ul.nav.nav-tabs.select-audio-source
+    = select_audio_source_button :record
+    = select_audio_source_button :upload
+  .tab-content.audio-source-block
+    .tab-pane#none.active
+      lall select something
+      %br
+    .tab-pane#record
+      = link_to "javascript:void(0);", :class => 'j-record-button' do
+        .btn.btn-large.btn-success.record-button
+          Record tune
+      = link_to "javascript:void(0);", :class => 'j-record-button hide' do
+        .btn.btn-large.btn-danger.record-button
+          Stop recording
+      %br
+      = link_to_function "Submit", "screenState('processing');", :class => 'btn btn-large btn-primary record-button disabled'
+    .tab-pane#upload
+      = form_for '#' do |f|
+        .browse-button
+          = f.button t('audio_sources.upload.select'), :class => 'btn btn-large btn-primary record-button'
+          = file_field :sample, :upload, :class => 'audio-upload-input', :data => {:url => recognize_path, }
+      .clearfix
+      %br
+      = link_to t('audio_sources.upload.submit'), "javascript:void(0);", :class => 'btn btn-large btn-primary record-button disabled'

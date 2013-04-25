@@ -4,12 +4,19 @@
 #= require jquery-fileupload/basic
 
 $ ->
+  jqXHR = null
   $('[rel*="tooltip"]').tooltip()
+
+  $('#cancel_processing').click ->
+    jqXHR.abort()
+    screenState('welcome')
+
   $('.j-record-button').on 'click', (e) ->
     e.preventDefault()
     $('.j-record-button').toggleClass('hide')
 
   $("#sample_upload").fileupload
+    acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i ,
     add:(e, data)->
       data.context = $("#upload a.record-button").removeClass("disabled").click ->
         screenState('processing')
@@ -18,25 +25,24 @@ $ ->
             if result != null
               state = if result.status == 1 then "good" else "bad"
               newtoneFace(state)
-              resultsOutput('success!', result.artist, result.track)
+              resultsOutput( result.artist, result.track)
               screenState('results')
             else
-              resultsOutput("","Oops&hellip;","I don't know anything similar.")
+              resultsOutput("Oops&hellip;","I don't know anything similar.")
               screenState('results')
               newtoneFace('bad')
             $("#upload a.record-button").unbind('click')
           .error (jqXHR, textStatus, errorThrown) ->
-            screenState('error')
+            if (errorThrown != 'abort')
+              screenState('error')
             $("#upload a.record-button").unbind('click')
-    
+
     always: (e, date)->
       $("#upload a.record-button").addClass("disabled")
-  
-  screenState('welcome')
 
 @newtoneFace = (state) ->
-  $('.j-newtone-state').removeClass('visible').addClass('hidden')
-  $('.j-newtone-state.newtone-' + state).removeClass('hidden').addClass('visible')
+  $('.j.newtone-face').removeClass('visible').addClass('hidden')
+  $('.j.newtone-face.newtone-' + state).removeClass('hidden').addClass('visible')
 
 @screenState = (screen) ->
   screens= ['.j-welcome-screen', '.j-processing-screen', '.j-results-screen', '.j-error-screen' ]
@@ -45,7 +51,6 @@ $ ->
       $(@).addClass('hide')
   $('.j-'+screen+'-screen').removeClass('hide')
 
-@resultsOutput = (message=null, artist=null, title=null)->
-  $('.j-message').html(message) if message != null
+@resultsOutput = (artist=null, title=null)->
   $('.j-artist').html(artist)
   $('.j-title').html(title)

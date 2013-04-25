@@ -1,9 +1,9 @@
-.audio-block
+.audio-source-block
   margin:
     top: 1em
     bottom: 1em
 
-.audio-buttons
+.select-audio-source
   display: block
   width: 100%
   margin: 0
@@ -21,10 +21,10 @@
     &, &.active
       &, &:hover, a, a:hover
         border-bottom: 0
-    & .audio-button-link
+    & .audio-source-button-link
       @extend .round-link
     &.active
-      & .audio-button-link
+      & .audio-source-button-link
         color: $white
         border-bottom: 0
         background: $redBrandColor
@@ -33,7 +33,7 @@
           color: $white
           border-bottom: 0
           background: $redBrandColor
-.audio-button-caption
+.audio-source-button-caption
   @extend small
   padding-top: 10px
   color: $gray
@@ -70,7 +70,7 @@
   margin: 0 auto
   width: 240px
 
-.audio-block
+.audio-source-block
   form
     margin: 0
     .browse-button

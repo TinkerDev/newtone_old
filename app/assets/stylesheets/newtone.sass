@@ -1,6 +1,9 @@
 @import "newtone/*.png"
 @include all-newtone-sprites
 
+.desktop
+  margin-top: 80px
+
 .newtone-face
   width: 369px
   height: 560px
@@ -8,11 +11,10 @@
   +transition(opacity 0.2s ease)
   &.hidden
     +opacity(0)
-
   &.visible
     +opacity(100)
 
-.newtone-face-initial
-  +transition(opacity 1s ease)
-
-
+.newtone-speach
+  font-size: 3*$baseFontSize
+  font-weight: 800
+  text-align: center

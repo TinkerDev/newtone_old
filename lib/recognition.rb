@@ -1,5 +1,9 @@
 class Recognition
 
+  def self.recognize audio_file_path
+    self.new(audio_file_path).recognize
+  end
+
   def initialize audio_file_path
     @audio_file_path = audio_file_path
   end

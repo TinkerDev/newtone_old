@@ -10,11 +10,11 @@
         = javascript_include_tag "application"
         = csrf_meta_tags
         = yield(:head)
-  %body{:class => "#{controller_name} #{action_name}"}
+  %body
     .navbar.navbar-static-top.application-navbar
-      %nav.navbar-inner
-        .container
-          = render 'layouts/navigation'
+      -#%nav.navbar-inner
+        -#.container
+          -#= render 'layouts/navigation'
     .application-container{:role => "main"}
       .container
         .content
