@@ -5,6 +5,10 @@ ru:
     upload:
       select: Выбрать файл
       submit: Распознать
+    record:
+      record: Записать аудио
+      stop: Остановить запись
+      submit: Распознать
   newtone_speach:
     welcome: "&mdash; я узнаю музыку"
     processing: "&mdash; хмм....."

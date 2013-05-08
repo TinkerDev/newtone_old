@@ -2,6 +2,8 @@
 #= require jquery_ujs
 #= require bootstrap
 #= require jquery-fileupload/basic
+#= require recording
+#= require jRecorder
 
 $ ->
   jqXHR = null
@@ -16,9 +18,9 @@ $ ->
     $('.j-record-button').toggleClass('hide')
 
   $("#sample_upload").fileupload
-    acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i ,
+#    acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i ,
     add:(e, data)->
-      data.context = $("#upload a.record-button").removeClass("disabled").click ->
+      data.context = $("#upload a.upload-button").removeClass("disabled").click ->
         screenState('processing')
         jqXHR = data.submit()
           .success (result, textStatus, jqXHR) ->
@@ -31,11 +33,11 @@ $ ->
               resultsOutput("Oops&hellip;","I don't know anything similar.")
               screenState('results')
               newtoneFace('bad')
-            $("#upload a.record-button").unbind('click')
+            $("#upload a.upload-button").unbind('click')
           .error (jqXHR, textStatus, errorThrown) ->
             if (errorThrown != 'abort')
               screenState('error')
-            $("#upload a.record-button").unbind('click')
+            $("#upload a.upload-button").unbind('click')
 
     always: (e, date)->
       $("#upload a.record-button").addClass("disabled")

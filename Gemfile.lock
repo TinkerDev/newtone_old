@@ -12,13 +12,6 @@ GIT
     newtone-fingerprint (0.0.1)
 
 GIT
-  remote: git://github.com/BrandyMint/newtone-solr.git
-  revision: 26fc2295f7b845a61c0d423547c8715884cbb845
-  specs:
-    newtone-solr (0.0.1)
-      escape (~> 0.0.4)
-
-GIT
   remote: git://github.com/twinslash/vk-ruby.git
   revision: 6691f34ec4ddad4d67625991f70707c2e623bf8c
   specs:
@@ -146,7 +139,6 @@ GEM
       launchy (~> 2.1)
       mail (~> 2.2)
     erubis (2.7.0)
-    escape (0.0.4)
     eventmachine (1.0.3)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -303,8 +295,6 @@ GEM
     rest-client (1.6.7)
       mime-types (>= 1.16)
     rolify (3.2.0)
-    rsolr (1.0.9)
-      builder (>= 2.1.2)
     rspec-core (2.13.1)
     rspec-expectations (2.13.0)
       diff-lcs (>= 1.1.3, < 2.0)
@@ -411,7 +401,6 @@ DEPENDENCIES
   lastfm
   mechanize
   newtone-fingerprint!
-  newtone-solr!
   omniauth (>= 1.1.3)
   omniauth-twitter
   pg (>= 0.14.1)
@@ -420,7 +409,6 @@ DEPENDENCIES
   rails_config
   resque
   rolify (>= 3.2.0)
-  rsolr
   rspec-rails (>= 2.12.2)
   sass-rails (~> 3.2.3)
   simple_form (>= 2.0.4)

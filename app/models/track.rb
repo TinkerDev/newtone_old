@@ -1,21 +1,28 @@
 class Track < ActiveRecord::Base
+  include Tire::Model::Search
+
   attr_accessor :raw_fingerprint, :artist_name
   attr_reader :fingerprint
-  attr_accessible :track_file, :remote_track_file_url, :artist, :raw_fingerprint, :track_id,
+  attr_accessible :track_file, :remote_track_file_url, :artist, :artist_id, :raw_fingerprint,
                   :title, :release, :genre, :duration, :version, :artist_name
   mount_uploader :track_file, TrackUploader
 
+  tire.mapping do
+    indexes :id, :index => :not_analyzed
+    indexes :fingerprint, :type => 'string', :as => ->(track) {track.fingerprint.term_string}# , :include_in_all => false, :analyzer => 'keyword'
+  end
+
   validates :fingerprint, :presence => true, :on => :create
-  validates :artist, :title, :presence => true
+  validates :artist_id, :title, :presence => true
   validates :artist_id, :uniqueness => {:scope => :title}
 
   before_validation :generate_fingerprint
   before_validation :copy_fingerprint_info
-  after_save :update_solr
+  after_save :update_elastic
   after_create :remove_track_file!
   after_create :delete_track_file_folder
 
-  after_destroy :delete_solr
+  after_destroy :update_index
 
   belongs_to :artist, :counter_cache => true
 
@@ -25,30 +32,19 @@ class Track < ActiveRecord::Base
   end
 
   def copy_fingerprint_info
-    self.artist_name = @fingerprint.artist if artist_name.blank?
-    if self.artist.nil?
-      artist = Artist.find_or_create_by_name(self.artist_name)
-      self.artist = artist
-    end
+    if @fingerprint.present?
+      self.artist_name = @fingerprint.artist if self.artist_name.blank?
+      if self.artist.nil?
+        self.artist = Artist.find_or_create_by_name(self.artist_name)
+      end
 
-    attributes=[:title, :release, :genre, :duration, :version].inject({}){|res, attr| val = @fingerprint.send(attr); res[attr] = val unless val.blank?; res;}
-    attributes[:track_id] = Digest::MD5.hexdigest(Time.now.to_s(:db)+rand(100000).to_s)
-    self.assign_attributes(attributes)
-  end
-
-  def update_solr
-    if self.fingerprint.present?
-      Solr.delete_track(self) if self.solr_documents.count > 0
-      Solr.add_track(self)
+      attributes=[:title, :release, :genre, :duration, :version].inject({}){|res, attr| val = @fingerprint.send(attr); res[attr] = val unless val.blank?; res;}
+      self.assign_attributes(attributes)
     end
   end
 
-  def delete_solr
-    Solr.delete_track(self)
-  end
-
-  def solr_documents
-    Solr.track_docs(self)
+  def update_elastic
+    update_index if @fingerprint.present?
   end
 
   def delete_track_file_folder

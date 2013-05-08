@@ -11,17 +11,16 @@
     .tab-pane#record
       = link_to "javascript:void(0);", :class => 'j-record-button' do
         .btn.btn-large.btn-success.record-button
-          Record tune
+          = t('audio_sources.record.record')
       = link_to "javascript:void(0);", :class => 'j-record-button hide' do
         .btn.btn-large.btn-danger.record-button
-          Stop recording
+          = t('audio_sources.record.stop')
       %br
-      = link_to_function "Submit", "screenState('processing');", :class => 'btn btn-large btn-primary record-button disabled'
+      = link_to_function t('audio_sources.record.submit'), "screenState('processing');", :class => 'btn btn-large btn-primary record-button disabled'
     .tab-pane#upload
-      = form_for '#' do |f|
-        .browse-button
-          = f.button t('audio_sources.upload.select'), :class => 'btn btn-large btn-primary record-button'
-          = file_field :sample, :upload, :class => 'audio-upload-input', :data => {:url => recognize_path, }
+      .browse-button
+        = button_tag t('audio_sources.upload.select'), :class => 'btn btn-large btn-primary select-button'
+        = file_field :sample, :upload, :class => 'audio-upload-input', :data => {:url => recognize_path}
       .clearfix
       %br
-      = link_to t('audio_sources.upload.submit'), "javascript:void(0);", :class => 'btn btn-large btn-primary record-button disabled'
+      = link_to t('audio_sources.upload.submit'), "javascript:void(0);", :class => 'btn btn-large btn-primary upload-button disabled'

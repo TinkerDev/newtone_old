@@ -1,20 +1,15 @@
 class Recognition
-
   def self.recognize audio_file_path
-    self.new(audio_file_path).recognize
+    fingerprint = Fingerprint.new audio_file_path
+    self.recognize_fingerprint(fingerprint)
   end
 
-  def initialize audio_file_path
-    @audio_file_path = audio_file_path
+  def self.recognize_by_code code
+    fingerprint = Fingerprint.new nil, code
+    self.recognize_fingerprint(fingerprint)
   end
 
-  def recognize elbow=10
-    @fingerprint = Fingerprint.new @audio_file_path
-    @fingerprint.clean_codes_by_time
-    solr_result = Solr.search @fingerprint.solr_string
-    docs = solr_result['response']['docs'] || []
-    results_hash = docs.inject({}){|res, el| key = el['track_id'].split('-').first; res.has_key?(key) ? res[key] << el['score'] : res[key] = [];res;}
-    results_hash.map{|track_id, scores| [Track.find_by_track_id(track_id), scores.sum]}.sort_by{|track, score| score}.reverse
+  def self.recognize_fingerprint fingerprint
+    Track.tire.search(fingerprint.term_string).results
   end
-
 end

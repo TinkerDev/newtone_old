@@ -4,7 +4,7 @@ class Dumper
     data = JSON.parse(string)
       data.each do |raw_fingerprint|
         begin
-          Track.create(:raw_fingerprint=>raw_fingerprint, :artist_name => 'dumper')
+          Track.create(:raw_fingerprint=>raw_fingerprint)
         rescue FingerprintError
 
         end

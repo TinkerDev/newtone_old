@@ -30,7 +30,6 @@ gem "quiet_assets", ">= 1.0.1", :group => :development
 gem "better_errors", ">= 0.6.0", :group => :development
 gem "binding_of_caller", ">= 0.7.1", :group => :development, :platforms => [:mri_19, :rbx]
 gem "hub", ">= 1.10.2", :require => nil, :group => [:development]
-gem 'rsolr'
 
 group :development do
   gem 'capistrano'
@@ -39,9 +38,7 @@ group :development do
 end
 gem "rails_config"
 gem 'resque'
-gem 'newtone-solr', :git => 'git://github.com/BrandyMint/newtone-solr.git'
 gem 'newtone-fingerprint', :git => 'git://github.com/BrandyMint/newtone-fingerprint.git'
-gem 'rsolr'
 gem 'carrierwave'
 gem 'activeadmin'
 gem 'lastfm'
