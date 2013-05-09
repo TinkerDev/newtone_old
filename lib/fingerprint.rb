@@ -18,13 +18,6 @@ class Fingerprint
     parse_decompressed_data_string
   end
 
-  def self.new_by_code code
-    @raw_fingerprint = {}
-    @raw_fingerprint['code'] = code
-
-    parse_fingerprint
-  end
-
   def term_string
     #@terms.zip(@offsets).flatten.join(' ')#.encode('utf-8')
     @terms.join(' ')
