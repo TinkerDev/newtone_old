@@ -1,6 +1,6 @@
 class RecognitionController < ApplicationController
   def recognize
-    audio = params[:sample][:upload].tempfile.path
+    audio = params[:audio][:sample].tempfile.path
     tracks = Recognition.recognize(audio).map{|r| [Track.find(r.id), r._score]}
     response = nil
     if tracks.any?

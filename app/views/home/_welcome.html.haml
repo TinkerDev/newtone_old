@@ -6,21 +6,29 @@
     = select_audio_source_button :upload
   .tab-content.audio-source-block
     .tab-pane#none.active
-      lall select something
+      .make_a_choice
+        = t('audio_sources.make_a_choice')
       %br
     .tab-pane#record
-      = link_to "javascript:void(0);", :class => 'j-record-button' do
-        .btn.btn-large.btn-success.record-button
-          = t('audio_sources.record.record')
-      = link_to "javascript:void(0);", :class => 'j-record-button hide' do
-        .btn.btn-large.btn-danger.record-button
-          = t('audio_sources.record.stop')
+      #flash_panel
+        %span#flashcontent
+          %p
+            = t('flash_enable')
+      = link_to "javascript:void(0);", :class => 'recording-button btn btn-large btn-success record-button' do
+        = t('audio_sources.record.record')
+      = link_to "javascript:void(0);", :class => 'recording-button hide btn btn-large btn-danger record-button' do
+        = t('audio_sources.record.stop')
       %br
-      = link_to_function t('audio_sources.record.submit'), "screenState('processing');", :class => 'btn btn-large btn-primary record-button disabled'
+      = link_to "javascript:void(0);", :class => 'btn btn-large btn-primary send-button disabled' do
+        = t('audio_sources.record.submit')
+      :plain
+        <form id="recordForm" name="recordForm" action="/recognize">
+            <input name="format" value="json" type="hidden">
+        </form>
     .tab-pane#upload
       .browse-button
         = button_tag t('audio_sources.upload.select'), :class => 'btn btn-large btn-primary select-button'
-        = file_field :sample, :upload, :class => 'audio-upload-input', :data => {:url => recognize_path}
+        = file_field :audio, :sample, :class => 'audio-upload-input', :data => {:url => recognize_path}
       .clearfix
       %br
       = link_to t('audio_sources.upload.submit'), "javascript:void(0);", :class => 'btn btn-large btn-primary upload-button disabled'

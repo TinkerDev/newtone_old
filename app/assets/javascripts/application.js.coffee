@@ -2,10 +2,10 @@
 #= require jquery_ujs
 #= require bootstrap
 #= require jquery-fileupload/basic
-#= require recording
-#= require jRecorder
+#= require swfobject
+#= require recorder
 
-$ ->
+$(document).ready ->
   jqXHR = null
   $('[rel*="tooltip"]').tooltip()
 
@@ -13,34 +13,37 @@ $ ->
     jqXHR.abort()
     screenState('welcome')
 
-  $('.j-record-button').on 'click', (e) ->
-    e.preventDefault()
-    $('.j-record-button').toggleClass('hide')
-
-  $("#sample_upload").fileupload
+  $("#audio_sample").fileupload
 #    acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i ,
     add:(e, data)->
       data.context = $("#upload a.upload-button").removeClass("disabled").click ->
         screenState('processing')
         jqXHR = data.submit()
           .success (result, textStatus, jqXHR) ->
-            if result != null
-              state = if result.status == 1 then "good" else "bad"
-              newtoneFace(state)
-              resultsOutput( result.artist, result.track)
-              screenState('results')
-            else
-              resultsOutput("Oops&hellip;","I don't know anything similar.")
-              screenState('results')
-              newtoneFace('bad')
+            ajaxSuccess(result)
             $("#upload a.upload-button").unbind('click')
           .error (jqXHR, textStatus, errorThrown) ->
-            if (errorThrown != 'abort')
-              screenState('error')
+            ajaxError(errorThrown)
             $("#upload a.upload-button").unbind('click')
-
     always: (e, date)->
-      $("#upload a.record-button").addClass("disabled")
+      $("#upload a.upload-button").addClass("disabled")
+
+  flashvars = {
+    'event_handler': 'microphone_recorder_events',
+  };
+  swfobject.embedSWF("recorder.swf", "flashcontent", 1, 1, "11.0.0", "", flashvars, {}, {'id': "recorderApp", 'name':  "recorderApp"});
+
+  @configureMicrophone = () ->
+    return if(!Recorder.isReady)
+    Recorder.configure(22, 100, 0, 2000);
+    Recorder.setUseEchoSuppression(false);
+    Recorder.setLoopBack(false);
+
+  $('#record .record-button').click ->
+    Recorder.record('audio', 'audio.wav');
+  $('#record .send-button').click ->
+    Recorder.save();
+
 
 @newtoneFace = (state) ->
   $('.j.newtone-face').removeClass('visible').addClass('hidden')
@@ -56,3 +59,18 @@ $ ->
 @resultsOutput = (artist=null, title=null)->
   $('.j-artist').html(artist)
   $('.j-title').html(title)
+
+@ajaxSuccess = (result) ->
+  if result != null
+    state = if result.status == 1 then "good" else "bad"
+    newtoneFace(state)
+    resultsOutput( result.artist, result.track)
+    screenState('results')
+  else
+    resultsOutput("Oops&hellip;","I don't know anything similar.")
+    screenState('results')
+    newtoneFace('bad')
+
+@ajaxError = (errorThrown) ->
+  if (errorThrown != 'abort')
+    screenState('error')

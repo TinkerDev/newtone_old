@@ -12,6 +12,9 @@
         = yield(:head)
     = render 'layouts/ga' if Rails.env.production?
   %body
+    .alert.alert-info
+      На данный момент Newtone находится в тестовом режиме, поэтому распознает только песни исполнителей Lana Del Ray и Земфира.
+
     .navbar.navbar-static-top.application-navbar
       -#%nav.navbar-inner
         -#.container

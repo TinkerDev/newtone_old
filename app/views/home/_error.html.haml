@@ -4,4 +4,4 @@
   .row
     %p.font-weight-normal= t('error').html_safe
   %hr.small
-  %h3.font-weight-normal= link_to "#{fontello('left-circled', 24)} #{t('go_back')}".html_safe, :back
+  %h3.font-weight-normal= link_to "#{fontello('left-circled', 24)} #{t('go_back')}".html_safe, "javascript:history.go(0)"
