@@ -38,7 +38,8 @@ class Track < ActiveRecord::Base
         self.artist = Artist.find_or_create_by_name(self.artist_name)
       end
 
-      attributes=[:title, :release, :genre, :duration, :version].inject({}){|res, attr| val = @fingerprint.send(attr); res[attr] = val unless val.blank?; res;}
+      attributes=[:release, :genre, :duration, :version].inject({}){|res, attr| val = @fingerprint.send(attr); res[attr] = val unless val.blank?; res;}
+      attributes[:title] = @fingerprint.title unless self.title
       self.assign_attributes(attributes)
     end
   end
