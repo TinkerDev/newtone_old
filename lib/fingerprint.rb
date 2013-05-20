@@ -28,7 +28,7 @@ class Fingerprint
   end
 
   [:artist, :title, :release, :genre, :version].each do |meta_info|
-    define_method(meta_info) { metadata[meta_info.to_s] }
+    define_method(meta_info) { metadata[meta_info.to_s].encode('utf-8') }
   end
 
   def duration
