@@ -5,7 +5,5 @@ set :rails_env, "production"
 #set :application, "newtone.name"
 #set :user,      'wwwswap'
 #require 'airbrake/capistrano'
-before 'deploy:update_code', 'solr:stop'
-after 'deploy:restart', 'solr:start'
 require "recipes0/init_d/foreverb"
 require 'airbrake/capistrano'

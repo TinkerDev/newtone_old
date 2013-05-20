@@ -77,8 +77,4 @@ config/settings.local.yml
 config/settings/*.local.yml
 config/environments/*.local.yml
 
-solr/data
-solr/pids
-newtone-solr.pid
-
 public/uploads/

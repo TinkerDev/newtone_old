@@ -26,15 +26,11 @@ Forever.run :fork => true do
   end
 
   every 1.day do
-    Parser.merge_artists_from_lastfm_chart_top_artist
+    #Parser.merge_artists_from_lastfm_chart_top_artist
   end
 
   every 1.day do
-    Parser.merge_tracks_from_lastfm_chart_top_tracks
-  end
-
-  every 1.day do
-    Solr.optimize
+    #Parser.merge_tracks_from_lastfm_chart_top_tracks
   end
 
 end
