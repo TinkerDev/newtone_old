@@ -47,6 +47,8 @@ module Newtone
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :ru
     config.i18n.locale = :ru
+    I18n.locale = config.i18n.locale = config.i18n.default_locale
+    I18n.reload!
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
