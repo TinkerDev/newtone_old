@@ -33,6 +33,12 @@ $(document).ready ->
   };
   swfobject.embedSWF("recorder.swf", "flashcontent", 1, 1, "11.0.0", "", flashvars, {}, {'id': "recorderApp", 'name':  "recorderApp"});
 
+  $("a[data-toggle=\"tab\"]").on "shown", (e) ->
+     if e.target.id=='audio-button-record'
+       Recorder.showPermissionWindow() if !Recorder.isReady
+#    e.target # activated tab
+#    e.relatedTarget # previous tab
+
   @configureMicrophone = () ->
     return if(!Recorder.isReady)
     Recorder.configure(22, 100, 0, 2000);
@@ -42,8 +48,8 @@ $(document).ready ->
   $('#record .record-button').click ->
     Recorder.record('audio', 'audio.wav');
   $('#record .send-button').click ->
+    screenState('processing');
     Recorder.save();
-
 
 @newtoneFace = (state) ->
   $('.j.newtone-face').removeClass('visible').addClass('hidden')

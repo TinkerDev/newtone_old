@@ -15,7 +15,7 @@ module ButtonsHelper
         return link_to_function("#{button} #{tooltip}".html_safe, "screenState('welcome'); newtoneFace('normal');")
     end
     content_tag :li, :class => "audio-button #{state}" do
-      link_to( "#{button} #{tooltip}".html_safe, "##{type}", 'data-toggle' => 'tab')
+      link_to( "#{button} #{tooltip}".html_safe, "##{type}", 'data-toggle' => 'tab', :id=>"audio-button-#{type}")
     end
   end
 

@@ -6,6 +6,10 @@
       %div{ :class => "j newtone-face newtone-#{state} hidden" }
   .span6
     .desktop
+      #flash_panel
+        %span#flashcontent
+          %p
+          = t('flash_enable')
       = render 'welcome'
       = render 'results'
       = render 'processing'
