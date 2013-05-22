@@ -190,10 +190,12 @@ function microphone_recorder_events()
     },
 
     showPermissionWindow: function() {
+//      $("#flashcontent").css('visibility', 'none');
       $("#flash_panel").css('top', $("#record .record-button").position().top);
       $("#flash_panel").css('left', $("#record .record-button").offset().left);
-      Recorder.resize(290, 160);
       $("#flash_panel").css('z-index', 1000);
+      Recorder.resize(290, 160);
+
       // need to wait until app is resized before displaying permissions screen
       setTimeout(function(){Recorder.recorder.permit();}, 1);
     },
