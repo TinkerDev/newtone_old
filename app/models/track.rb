@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Track < ActiveRecord::Base
   include Tire::Model::Search
 
@@ -9,7 +10,7 @@ class Track < ActiveRecord::Base
 
   tire.mapping do
     indexes :id, :index => :not_analyzed
-    indexes :fingerprint, :type => 'string', :as => ->(track) {track.fingerprint.term_string}# , :include_in_all => false, :analyzer => 'keyword'
+    indexes :terms, :type => :string, :index_name=>'term', :as => ->(track) {track.fingerprint.terms}# , :include_in_all => false, :analyzer => 'keyword'
   end
 
   validates :fingerprint, :presence => true, :on => :create
@@ -39,7 +40,7 @@ class Track < ActiveRecord::Base
       end
 
       attributes=[:release, :genre, :duration, :version].inject({}){|res, attr| val = @fingerprint.send(attr); res[attr] = val unless val.blank?; res;}
-      attributes[:title] = @fingerprint.title unless self.title
+      attributes[:title] = @fingerprint.title unless self.title.present?
       self.assign_attributes(attributes)
     end
   end
@@ -50,5 +51,15 @@ class Track < ActiveRecord::Base
 
   def delete_track_file_folder
     FileUtils.remove_dir("#{Rails.root}/public/uploads/#{self.class.to_s.underscore}/#{self.id}", :force => true)
+  end
+
+  def self.seed
+    songs = ['Без шансов', 'Гора', 'Деньги', 'Если бы', 'Кофевино', 'Похоронила', 'Река', 'Чайка', 'Жить В Твоей Голове', 'Кувырок']
+    songs.map do |song|
+      my_file = "/Users/unloved/Downloads/Земфира - #{song}.mp3"
+      t=Track.new(:title=>song)
+      t.track_file.store!(File.open(my_file))
+      t.save
+    end
   end
 end

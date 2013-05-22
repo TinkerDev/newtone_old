@@ -5,7 +5,8 @@ class RecognitionController < ApplicationController
     response = nil
     if tracks.any?
       track = tracks.first[0]
-      response = {:artist => track.artist.name, :track => track.title, :status => 1 }
+      response = {:artist => track.artist.name, :track => track.title, :status => 1}
+      #response = tracks.map{|el| [el[0].title, el[1]]}
     end
     render :json => response
   end

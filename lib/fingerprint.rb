@@ -20,7 +20,9 @@ class Fingerprint
 
   def term_string
     #@terms.zip(@offsets).flatten.join(' ')#.encode('utf-8')
-    @terms.join(' ')
+    #@terms.join(' ')
+    #@terms.zip(@offsets).map{|el| el.join(' ')}
+    @terms
   end
 
   def metadata
@@ -28,7 +30,7 @@ class Fingerprint
   end
 
   [:artist, :title, :release, :genre].each do |meta_info|
-    define_method(meta_info) { metadata[meta_info.to_s]}
+    define_method(meta_info) { metadata[meta_info.to_s].encode('utf-8')}
   end
 
   def version

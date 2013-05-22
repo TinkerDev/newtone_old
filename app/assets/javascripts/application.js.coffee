@@ -36,6 +36,8 @@ $(document).ready ->
   $("a[data-toggle=\"tab\"]").on "shown", (e) ->
      if e.target.id=='audio-button-record'
        Recorder.showPermissionWindow() if !Recorder.isReady
+     else
+       Recorder.defaultSize()
 #    e.target # activated tab
 #    e.relatedTarget # previous tab
 
