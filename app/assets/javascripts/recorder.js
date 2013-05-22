@@ -168,9 +168,7 @@ function microphone_recorder_events()
     },
 
     defaultSize: function(width, height) {
-      $("#flash_panel").css('visibility', 'hidden');
-      $("#flash_panel").css('top', 0)
-      $("#flash_panel").css('left', 0)
+      $("#flash_panel").css('z-index', -1000);
       Recorder.resize(Recorder.recorderOriginalWidth, Recorder.recorderOriginalHeight);
     },
 
@@ -192,10 +190,10 @@ function microphone_recorder_events()
     },
 
     showPermissionWindow: function() {
-        $("#flash_panel").css('visibility', 'visible');
-        $("#flash_panel").css('top', $("#record .record-button").position().top);
-        $("#flash_panel").css('left', $("#record .record-button").offset().left)
+      $("#flash_panel").css('top', $("#record .record-button").position().top);
+      $("#flash_panel").css('left', $("#record .record-button").offset().left);
       Recorder.resize(290, 160);
+      $("#flash_panel").css('z-index', 1000);
       // need to wait until app is resized before displaying permissions screen
       setTimeout(function(){Recorder.recorder.permit();}, 1);
     },
