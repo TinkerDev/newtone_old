@@ -2,14 +2,15 @@
 %html
   %head
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
-      %title= content_for?(:title) ? yield(:title) : "Newtone"
-      %meta{:content => content_for?(:description) ? yield(:description) : "Newtone", :name => "description"}
-        = stylesheet_link_tag "application", :media => "all"
-        = stylesheet_link_tag "http://fonts.googleapis.com/css?family=Open+Sans:400,700,300,800&subset=latin,cyrillic"
-        = favicon_link_tag image_path('favicon.ico')
-        = javascript_include_tag "application"
-        = csrf_meta_tags
-        = yield(:head)
+    %title= content_for?(:title) ? yield(:title) : "Newtone"
+    %meta{:content => content_for?(:description) ? yield(:description) : "Newtone", :name => "description"}
+    = stylesheet_link_tag "application", :media => "all"
+    = stylesheet_link_tag "http://fonts.googleapis.com/css?family=Open+Sans:400,700,300,800&subset=latin,cyrillic"
+    %link{:rel=>'image_src', :href=>image_path('newtone-caption.png')}
+    = favicon_link_tag image_path('favicon.ico')
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+    = yield(:head)
     = render 'layouts/ga' if Rails.env.production?
   %body
     .alert.alert-info
