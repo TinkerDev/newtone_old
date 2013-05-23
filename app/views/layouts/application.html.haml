@@ -13,7 +13,7 @@
     = render 'layouts/ga' if Rails.env.production?
   %body
     .alert.alert-info
-      На данный момент Newtone находится в тестовом режиме, поэтому распознает только песни исполнителей #{link_to 'Lana Del Rey', 'http://www.youtube.com/user/LanaDelRey'} и #{link_to 'Земфира', 'http://music.yandex.ru/zemfira/'}.
+      На данный момент Newtone находится в тестовом режиме, поэтому распознает только песни исполнителей #{link_to 'Lana Del Rey', 'http://www.youtube.com/user/LanaDelRey', :target=>'_blank'} и #{link_to 'Земфира', 'http://music.yandex.ru/zemfira/', :target=>'_blank'}.
       %br
       Оптимальное время для распознавания трека — 30 секунд, однако в большинстве случаев хватает меньшего времени.
 
