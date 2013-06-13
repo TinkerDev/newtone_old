@@ -18,8 +18,8 @@ class Track < ActiveRecord::Base
 
   before_validation :generate_fingerprint
   after_save :update_elastic
-  #after_create :remove_track_file!
-  #after_create :delete_track_file_folder
+  after_create :remove_track_file!
+  after_create :delete_track_file_folder
 
   after_destroy :update_index
 
