@@ -64,20 +64,25 @@ $(document).ready ->
       $(@).addClass('hide')
   $('.j-'+screen+'-screen').removeClass('hide')
 
-@resultsOutput = (artist=null, title=null)->
+@resultsGoodOutput = (artist=null, title=null)->
   $('.j-artist').html(artist)
   $('.j-title').html(title)
+  $('.j-results-screen .good').removeClass('hide')
+  $('.j-results-screen .bad').addClass('hide')
+
+@resultsBadOutput = () ->
+  $('.j-results-screen .good').addClass('hide')
+  $('.j-results-screen .bad').removeClass('hide')
 
 @ajaxSuccess = (result) ->
   if result != null
-    state = if result.status == 1 then "good" else "bad"
-    newtoneFace(state)
-    resultsOutput( result.artist, result.track)
+    newtoneFace('good')
+    resultsGoodOutput(result.artist, result.track)
     screenState('results')
   else
-    resultsOutput("Oops&hellip;","I don't know anything similar.")
-    screenState('results')
     newtoneFace('bad')
+    resultsBadOutput()
+    screenState('results')
 
 @ajaxError = (errorThrown) ->
   if (errorThrown != 'abort')

@@ -13,7 +13,10 @@ ru:
   newtone_speach:
     welcome: "&mdash; я узнаю музыку"
     processing: "&mdash; хмм....."
-    results: "&mdash; я знаю!"
+    results:
+      good: "&mdash; я знаю!"
+      bad: "&mdash; я не знаю"
+      bad_text: "Не нахожу похожих песен.<br>Попробуйте улучшить качество и увеличить длинну записанного фрагмента."
     error: "&mdash; ой, что то пошло не так!"
 
   cancel_processing: отменить
