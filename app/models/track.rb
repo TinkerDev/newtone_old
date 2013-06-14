@@ -9,7 +9,7 @@ class Track < ActiveRecord::Base
 
   tire.mapping do
     indexes :id, :index => :not_analyzed
-    indexes :terms, :type => :string, :index_name=>'term', :as => ->(track) {f=Fingerprint.new self.track_file.path; f.term_string}# , :include_in_all => false, :analyzer => 'keyword'
+    indexes :terms, :type => :string, :index_name=>'term', :as => ->(track) {track.fingerprint.term_string}# , :include_in_all => false, :analyzer => 'keyword'
   end
 
   validates :fingerprint, :presence => true, :on => :create
