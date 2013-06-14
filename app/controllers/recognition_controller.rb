@@ -7,7 +7,7 @@ class RecognitionController < ApplicationController
     recognition = Recognition.new(new_path)
     FileUtils.rm(new_path)
     response = nil
-    if recognition.tracks.any? and recognition.top_result_ratio > 100
+    if recognition.tracks.any? and recognition.top_result_ratio > 10
       track = recognition.tracks.first[0]
       response = {:artist => track.artist.name, :track => track.title, :status => 1}
     end
